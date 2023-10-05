@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 18:16:12 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/04 20:37:53 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/05 23:36:46 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,30 @@ int main(int argc, char **argv)
         std::cout << "Invalid amount of arguments! 3 required." << std::endl;
         return (PARSE_ERROR);
     }
+    else if (std::string(argv[1]).empty())
+    {
+        std::cout << "String s1 should not be empty!" << std::endl;
+        return (PARSE_ERROR);
+    }
     
     std::fstream file;
     std::fstream fileReplace;
-    file.open(argv[1], std::fstream::in | std::fstream::out);
-    file.open(std::string(argv[1]).append(".replace"), std::fstream::in | std::fstream::out);
+    file.open(argv[1], std::fstream::in);
+    file.open(std::string(argv[1]).append(".replace"), std::fstream::out);
     
+    size_t index;
+    std::string line;
+    std::string s1(argv[2]);
+    std::string s2(argv[3]);
+    while (std::getline(file, line))
+    {
+        index = line.find(s1);
+        while (index != std::string::npos)
+        {
+            line.erase(index, s1.length());
+            line.insert(index, s2);
+            index = line.find(s1);
+        }
+        fileReplace << line << std::endl;
+    }
 }
