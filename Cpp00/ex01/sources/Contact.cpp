@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:27:19 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/03 21:44:06 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/05 17:50:31 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Contact.hpp"
+
+Contact::Contact(std::string fname = "", std::string lname = "", std::string nname = "", std::string number = "", std::string secret = "")
+:   firstName(fname),
+    lastName(lname),
+    nickname(nname),
+    phoneNumber(number),
+    darkestSecret(secret)
+{}
 
 void	Contact::print(void) const
 {

@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:03:26 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/03 22:39:10 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/05 17:51:16 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/PhoneBook.hpp"
+
+PhoneBook::PhoneBook() 
+:	count(0)
+{}
 
 void    PhoneBook::addContact(void)
 {

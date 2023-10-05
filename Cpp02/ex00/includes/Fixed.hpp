@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 16:21:41 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/05 17:50:50 by hlesny           ###   ########.fr       */
+/*   Created: 2023/10/05 18:32:55 by hlesny            #+#    #+#             */
+/*   Updated: 2023/10/05 19:03:12 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#pragma once
+
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
 #include <iostream>
-#include <iomanip>
-#include <array>
-#include <string>
-#include "Contact.hpp"
 
-# define PBOOK_SIZE	8
-
-class PhoneBook {
-    
+class Fixed
+{
     public :
-		PhoneBook();
-        void    addContact(void);
-        void    displayContact(size_t index) const;
-		void    displayPhoneBookSnippet(void) const;
-		void 	searchContact(void) const;
+        Fixed();
+        Fixed(Fixed const& to_copy);
+        Fixed& operator=(Fixed const&fNumber);
+        ~Fixed();
+        int     getRawBits( void ) const;
+        void    setRawBits( int const raw );
 
     private :
-        Contact	contacts[PBOOK_SIZE];
-        size_t					count;
-    
+        int _value;
+        static const int    _nbFractionalBits;
 };
 
 #endif
