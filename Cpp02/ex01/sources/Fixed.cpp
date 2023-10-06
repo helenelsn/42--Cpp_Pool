@@ -3,21 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:31:50 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/05 19:51:57 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/06 15:54:45 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Fixed.hpp"
 
-ostream&    operator<<(ostream &stream, Fixed const& n)
+int const   Fixed::_nbFractionalBits = 8;
+
+std::ostream&    operator<<(std::ostream &stream, Fixed const& n)
 {
-    
+    stream << n.toFloat();
+    return (stream);
 }
 
-int const   Fixed::_nbFractionalBits = 8;
+Fixed &Fixed::operator=(Fixed const& to_copy)
+{
+    std::cout << "Copy assignment operator called" << std::endl;
+    setRawBits(to_copy.getRawBits());
+    return (*this);
+}
 
 Fixed::Fixed()
 :   _value(0)
@@ -26,13 +34,15 @@ Fixed::Fixed()
 }
 
 Fixed::Fixed(const int n)
+:   _value(n << _nbFractionalBits)
 {
-    
+    std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const double n)
+:   _value(roundf(n * (1 << _nbFractionalBits))) //_value(roundf(n * pow(2, _nbFractionalBits)))
 {
-    
+    std::cout << "Float constructor called" << std::endl;
 }
 
 
@@ -48,13 +58,6 @@ Fixed::~Fixed()
 }
 
 
-Fixed &Fixed::operator=(Fixed const& to_copy)
-{
-    std::cout << "Copy assignment operator called" << std::endl;
-    setRawBits(to_copy.getRawBits());
-    return (*this);
-}
-
 int     Fixed::getRawBits( void ) const
 {
     std::cout << "getRawBits member function called" << std::endl;
@@ -68,11 +71,12 @@ void    Fixed::setRawBits( int const raw )
 
 float	Fixed::toFloat( void ) const
 {
-    
+    //return (float(_value / (1 << _nbFractionalBits)));
+    return (float(_value / pow(2, _nbFractionalBits)));
 }
 
 int		Fixed::toInt( void ) const
 {
-    
+    return (_value >> _nbFractionalBits);
 }
 

@@ -6,11 +6,11 @@
 #    By: Helene <Helene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:57:58 by Helene            #+#    #+#              #
-#    Updated: 2023/10/06 13:55:02 by Helene           ###   ########.fr        #
+#    Updated: 2023/10/06 14:15:07 by Helene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = convert
+NAME = convert_and_manipulate
 CC = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror # -g3
 RM = rm -f
