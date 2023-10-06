@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:31:50 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/06 19:38:45 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/06 22:36:21 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ Fixed::Fixed(Fixed const& to_copy)
 {
     std::cout << "Copy constructor called" << std::endl;
     *this = to_copy;
+    // setRawBits(to_copy.getRawBits());
 }
 
 Fixed::~Fixed()
@@ -117,6 +118,16 @@ const Fixed Fixed::operator*(Fixed const& n)
 {
     return (Fixed(n.toFloat() * this->toFloat()));
 }
+
+const Fixed Fixed::operator*(double a)
+{
+    return (Fixed(a * this->toFloat()));
+}
+
+// const Fixed operator*(double a, Fixed const& n)
+// {
+//     return (n * a);
+// }
 
 const Fixed Fixed::operator/(Fixed const& n)
 {

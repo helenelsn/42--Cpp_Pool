@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:32:55 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/06 15:53:19 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/06 22:42:01 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class Fixed
         const Fixed operator-(Fixed const& n);
         const Fixed operator*(Fixed const& n);
         const Fixed operator/(Fixed const& n);
+        const Fixed operator*(double a);
         Fixed &operator++(void); /* ++p */
         Fixed operator++(int); /* p++ */
         Fixed &operator--(void); /* --p */
@@ -57,5 +58,6 @@ class Fixed
 };
 
 std::ostream& operator<<(std::ostream &stream, Fixed const& n);
+//const Fixed operator*(double a, Fixed const& n);
 
 #endif

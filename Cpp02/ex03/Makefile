@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+         #
+#    By: Helene <Helene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:57:58 by Helene            #+#    #+#              #
-#    Updated: 2023/10/06 19:41:40 by hlesny           ###   ########.fr        #
+#    Updated: 2023/10/06 22:31:03 by Helene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ INCS_DIR = ./includes/
 
 SRCS = 	main.cpp \
 		Fixed.cpp \
+		Point.cpp \
+		bsp.cpp
 		
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.cpp=.o))
 DEPS = $(addprefix $(OBJS_DIR), $(SRCS:.cpp=.d))
