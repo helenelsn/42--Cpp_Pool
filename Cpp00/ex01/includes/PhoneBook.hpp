@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:21:41 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/05 17:50:50 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/06 18:43:44 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 #include <iostream>
 #include <iomanip>
-#include <array>
 #include <string>
+#include <stdlib.h>
 #include "Contact.hpp"
 
 # define PBOOK_SIZE	8

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:42:10 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/04 01:39:19 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/06 19:00:03 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,13 @@ int	Account::_totalNbWithdrawals = 0;
 
 void	Account::_displayTimestamp( void )
 {
+    char timeBuffer[20];
     std::time_t now = std::time(0);
-    std::cout << std::put_time(std::localtime(&now), "[%Y%m%d_%OH%OM%OS] ");
+    
+    std::strftime(timeBuffer, sizeof(timeBuffer), "[%Y%m%d_%OH%OM%OS]", std::localtime(&now));
+    std::cout << timeBuffer << " ";
+    
+    /* std::cout << std::put_time(std::localtime(&now), "[%Y%m%d_%OH%OM%OS] "); */
 }
 
 Account::Account( void )

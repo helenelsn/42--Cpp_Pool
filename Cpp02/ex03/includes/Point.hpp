@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 15:56:32 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/06 19:03:18 by hlesny           ###   ########.fr       */
+/*   Created: 2023/10/06 19:42:04 by hlesny            #+#    #+#             */
+/*   Updated: 2023/10/06 19:52:37 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Zombie.hpp"
+#pragma once
 
-Zombie* zombieHorde( int N, std::string name );
+#ifndef POINT_HPP
+# define POINT_HPP
 
-int main ( void )
+#include "Fixed.hpp"
+
+class Point
 {
-    Zombie *first = zombieHorde(5, "roro");
-    for (int i = 0; i < 5; i++)
-        first[i].announce();
-    delete [] first;
-    first = NULL;
-}
+    public :
+        Point();
+        Point(double const x, double const y);
+        Point(Point const& to_copy);
+        Point &operator=(Point const& u);
+        bool operator==()
+        ~Point();
+
+    private :
+        const Fixed _x;
+        const Fixed _y;
+};
+
+
+#endif

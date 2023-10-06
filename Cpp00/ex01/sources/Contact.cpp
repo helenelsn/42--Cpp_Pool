@@ -6,13 +6,21 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:27:19 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/05 17:50:31 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/06 18:45:53 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Contact.hpp"
 
-Contact::Contact(std::string fname = "", std::string lname = "", std::string nname = "", std::string number = "", std::string secret = "")
+Contact::Contact()
+:   firstName(""),
+    lastName(""),
+    nickname(""),
+    phoneNumber(""),
+    darkestSecret("")
+{}
+
+Contact::Contact(std::string fname, std::string lname, std::string nname, std::string number, std::string secret)
 :   firstName(fname),
     lastName(lname),
     nickname(nname),

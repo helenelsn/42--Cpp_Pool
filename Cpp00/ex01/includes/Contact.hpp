@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:39:11 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/05 17:50:39 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/06 18:46:07 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 class Contact{
 
     public :
-        Contact(std::string fname = "", std::string lname = "", std::string nname = "", std::string number = "", std::string secret = "");
+        Contact();
+        Contact(std::string fname, std::string lname, std::string nname, std::string number, std::string secret);
         void			print(void) const;
 		std::string 	getFirstName(void) const;
 		std::string 	getLastName(void) const;

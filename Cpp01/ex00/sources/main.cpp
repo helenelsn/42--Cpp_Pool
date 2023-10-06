@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:55:55 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/04 15:53:12 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/06 19:02:59 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int main( void )
 	zozo->announce();
 	randomChump("zaza");
 	delete zozo;
-	zozo = nullptr;
+	zozo = NULL;
 	return (0);
 }

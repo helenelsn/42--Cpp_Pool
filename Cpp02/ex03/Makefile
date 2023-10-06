@@ -1,16 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile_template                                  :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Helene <Helene@student.42.fr>              +#+  +:+       +#+         #
+#    By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:57:58 by Helene            #+#    #+#              #
-#    Updated: 2023/10/04 14:58:16 by Helene           ###   ########.fr        #
+#    Updated: 2023/10/06 19:41:40 by hlesny           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = executabl_name
+NAME = 2dSearch
 CC = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror # -g3
 RM = rm -f
@@ -20,8 +20,7 @@ OBJS_DIR = ./objects/
 INCS_DIR = ./includes/
 
 SRCS = 	main.cpp \
-		\
-		\
+		Fixed.cpp \
 		
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.cpp=.o))
 DEPS = $(addprefix $(OBJS_DIR), $(SRCS:.cpp=.d))
