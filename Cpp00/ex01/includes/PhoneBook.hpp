@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:21:41 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/06 18:43:44 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/08 15:12:21 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include "Contact.hpp"
 
-# define PBOOK_SIZE	8
+# define PBOOK_SIZE	3
 
 class PhoneBook {
     

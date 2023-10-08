@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:03:26 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/05 17:51:16 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/08 15:13:58 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,57 +23,47 @@ void    PhoneBook::addContact(void)
     std::string nickname = "";
     std::string number = "";
     std::string secret = "";
-    std::string check = "n";
 
     do
     {
         std::cout << "Enter their first name" << std::endl;
         getline(std::cin, firstName);
-        std::cout << "First name : " << firstName << ". Type again ? [y/n]" << std::endl;
-        getline(std::cin, check);
-    } while (check == "y" || firstName == "");
+    } while (firstName == "");
 
     do
     {
         std::cout << "Enter their last name" << std::endl;
         getline(std::cin, lastName);
-        std::cout << "Last name : " << lastName << ". Type again ? [y/n]" << std::endl;
-        getline(std::cin, check);
-    } while (check == "y" || lastName == "");
+    } while (lastName == "");
 
     do
     {
         std::cout << "Enter their nickname" << std::endl;
         getline(std::cin, nickname);
-        std::cout << "Nickname : " << nickname << ". Type again ? [y/n]" << std::endl;
-        getline(std::cin, check);
-    } while (check == "y" || nickname == "");
+    } while (nickname == "");
 
     do
     {
         std::cout << "Enter their phone number" << std::endl;
         getline(std::cin, number);
-        std::cout << "Phone number : " << number << ". Type again ? [y/n]" << std::endl;
-        getline(std::cin, check);
-    } while (check == "y" || number == "");
+    } while (number == "");
 
     do
     {
         std::cout << "Enter their darkest secret" << std::endl;
         getline(std::cin, secret);
-        std::cout << "Darkest secret : " << secret << ". Type again ? [y/n]" << std::endl;
-        getline(std::cin, check);
-    } while (check == "y" && secret == "");
+    } while (secret == "");
     
     Contact newContact = Contact(firstName, lastName, nickname, number, secret);
     
-    if (count + 1 < PBOOK_SIZE)
+    if (count < PBOOK_SIZE)
     {
         contacts[count] = newContact;
         (count)++;
     }
     else
     {
+        contacts[0].~Contact();
         for (int i = 0; i < PBOOK_SIZE - 1; i++)
             contacts[i] = contacts[i + 1];
         contacts[PBOOK_SIZE - 1] = newContact;

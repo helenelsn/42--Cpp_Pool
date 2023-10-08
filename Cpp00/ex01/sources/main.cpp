@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:47:39 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/03 22:24:59 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/08 15:15:31 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int main(void)
 {
     std::string userInput;
-    PhoneBook phoneBook; /* quel constructeur ?*/
+    PhoneBook phoneBook;
     
     std::cout << "Welcome to this phonebook reenactment. This program only accepts ADD, SEARCH and EXIT" << std::endl;
     do
@@ -35,7 +35,7 @@ int main(void)
                 phoneBook.searchContact();  
         }
     } while (userInput != "EXIT");
-    std::cout << "Exiting this shitty phonebook" << std::endl;
+    std::cout << "Exiting the phonebook" << std::endl;
     
     return (0);
 }

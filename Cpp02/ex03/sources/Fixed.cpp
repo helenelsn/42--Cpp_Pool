@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:31:50 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/06 22:36:21 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/07 21:29:48 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,22 +104,22 @@ bool Fixed::operator==(Fixed const& n)
     return (this->getRawBits() == n.getRawBits());
 }
 
-const Fixed Fixed::operator+(Fixed const& n)
+Fixed Fixed::operator+(Fixed const& n)
 {
     return (Fixed(n.toFloat() + this->toFloat()));
 }
 
-const Fixed Fixed::operator-(Fixed const& n)
+Fixed Fixed::operator-(Fixed const& n)
 {
     return (Fixed(n.toFloat() - this->toFloat()));
 }
 
-const Fixed Fixed::operator*(Fixed const& n)
+Fixed Fixed::operator*(Fixed const& n)
 {
     return (Fixed(n.toFloat() * this->toFloat()));
 }
 
-const Fixed Fixed::operator*(double a)
+Fixed Fixed::operator*(double a)
 {
     return (Fixed(a * this->toFloat()));
 }
@@ -129,7 +129,7 @@ const Fixed Fixed::operator*(double a)
 //     return (n * a);
 // }
 
-const Fixed Fixed::operator/(Fixed const& n)
+Fixed Fixed::operator/(Fixed const& n)
 {
     return (Fixed(n.toFloat() / this->toFloat()));
 }
