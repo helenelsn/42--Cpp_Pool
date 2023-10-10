@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 18:00:55 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/10 19:52:45 by hlesny           ###   ########.fr       */
+/*   Created: 2023/10/10 17:02:55 by hlesny            #+#    #+#             */
+/*   Updated: 2023/10/10 20:03:48 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef DOG_HPP
+# define DOG_HPP
 
-#include "ClapTrap.hpp"
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-class ScavTrap : public virtual ClapTrap
+class Dog : public Animal
 {
-    public :
-        ScavTrap();
-        ScavTrap(std::string name);
-        ScavTrap(ScavTrap const& to_copy);
-        ScavTrap operator=(ScavTrap const& to_copy);
-        void attack(const std::string& target);
-        void guardGate(void);
-        virtual ~ScavTrap();
+	public:
+		Dog();
+        Dog(const Dog& other);
+        Dog &operator=(const Dog& other);
+        void    makeSound(void) const;
+        /* std::string getType(void) const; */
+        virtual ~Dog();
+
+    private :
+        Brain *_brain;
 };
 
 #endif

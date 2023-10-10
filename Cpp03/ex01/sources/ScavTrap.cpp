@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:00:35 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/09 18:40:00 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:28:23 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ ScavTrap ScavTrap::operator=(ScavTrap const& to_copy)
     this->_energyPoints = to_copy._energyPoints;
     this->_hitPoints = to_copy._hitPoints;
     return (*this);
+}
+
+void ScavTrap::attack(const std::string& target)
+{
+    if (!_hitPoints || !_energyPoints)
+        return ;
+   
+   _energyPoints--;
+
+   std::cout << "ScavTrap " << _name <<  " attacks " << target;
+   std::cout <<  ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 
 void ScavTrap::guardGate()

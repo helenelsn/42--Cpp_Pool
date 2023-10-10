@@ -3,21 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:38:25 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/09 18:34:38 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:23:34 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ClapTrap.hpp"
 
 ClapTrap::ClapTrap()
+:   _name((std::string)"default_clap_trap"),
+     _hitPoints(10),
+    _energyPoints(10),
+    _attackDamage(10)
 {
-    std::cout << "Default constructor called" << std::endl;
+    std::cout << "Default constructor of ClapTrap called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name, unsigned int hit = 10, unsigned int energy = 10, unsigned int attack = 10)
+ClapTrap::ClapTrap(std::string name, unsigned int hit, unsigned int energy, unsigned int attack)
  :  _name(name),
     _hitPoints(hit),
     _energyPoints(energy),
@@ -41,15 +45,14 @@ ClapTrap    ClapTrap::operator=(ClapTrap const& to_copy)
     return (*this);
 }
 
-void ClapTrap::attack(ClapTrap & target)
+void ClapTrap::attack(const std::string& target)
 {
     if (!_hitPoints || !_energyPoints)
         return ;
    
-   target.takeDamage(_attackDamage);
    _energyPoints--;
 
-   std::cout << "ClapTrap " << _name <<  " attacks " << target._name;
+   std::cout << "ClapTrap " << _name <<  " attacks " << target;
    std::cout <<  ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 

@@ -3,18 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:48:18 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/10 09:26:04 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:47:49 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/DiamondTrap.hpp"
 
+/* le soin d’initialiser les super-classes virtuelles incombe à la sous-classe la plus
+dérivée */
 DiamondTrap::DiamondTrap(std::string name)
-:   ClapTrap(name, 100, 50, 30)
+:   ClapTrap(name + "_clap_trap"),
+    ScavTrap(name + "_clap_trap"),
+    FragTrap(name + "_clap_trap"),
+    _name(name)
 {
+    _attackDamage = 30;
+    _energyPoints = 100; /* y a pas une meilleure maniere de faire ? */
     std::cout << "Constructor of DiamondTrap called" << std::endl;
 }
 
@@ -35,9 +42,15 @@ DiamondTrap DiamondTrap::operator=(DiamondTrap const& to_copy)
     return (*this);
 }
 
-void DiamondTrap::highFivesGuys(void)
+void DiamondTrap::attack(const std::string& target)
 {
-    std::cout << "Scat trap " << _name << " wishes to do a high fives" << std::endl;
+   ScavTrap::attack(target);
+}
+
+void    DiamondTrap::WhoAmI(void)
+{
+    std::cout << "My name is : " << _name;
+    std::cout << ", and my ClapTrap name : " << ClapTrap::_name << std::endl;
 }
 
 DiamondTrap::~DiamondTrap()

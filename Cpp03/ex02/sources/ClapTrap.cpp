@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:38:25 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/09 18:34:38 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:22:43 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,14 @@ ClapTrap    ClapTrap::operator=(ClapTrap const& to_copy)
     return (*this);
 }
 
-void ClapTrap::attack(ClapTrap & target)
+void ClapTrap::attack(const std::string& target)
 {
     if (!_hitPoints || !_energyPoints)
         return ;
    
-   target.takeDamage(_attackDamage);
    _energyPoints--;
 
-   std::cout << "ClapTrap " << _name <<  " attacks " << target._name;
+   std::cout << "ClapTrap " << _name <<  " attacks " << target;
    std::cout <<  ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 

@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 18:00:55 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/10 19:52:45 by hlesny           ###   ########.fr       */
+/*   Created: 2023/10/10 20:01:01 by hlesny            #+#    #+#             */
+/*   Updated: 2023/10/10 20:01:07 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#include "../includes/Brain.hpp"
 
-#include "ClapTrap.hpp"
-
-class ScavTrap : public virtual ClapTrap
+Brain::Brain(/* args */)
 {
-    public :
-        ScavTrap();
-        ScavTrap(std::string name);
-        ScavTrap(ScavTrap const& to_copy);
-        ScavTrap operator=(ScavTrap const& to_copy);
-        void attack(const std::string& target);
-        void guardGate(void);
-        virtual ~ScavTrap();
-};
+	std::cout << "Brain: Default constructor" << std::endl;
+}
 
-#endif
+Brain::Brain(const Brain& other) {
+
+	std::cout << "Brain: Copy constructor" << std::endl;
+}
+
+Brain& Brain::operator=(const Brain& other) {
+    
+	std::cout << "Brain: Assignment operator" << std::endl;
+	return *this;
+}
+
+Brain::~Brain()
+{
+    std::cout << "Brain: Destructor" << std::endl;
+}
