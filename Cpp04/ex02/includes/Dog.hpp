@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 20:00:35 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 23:36:23 by hlesny           ###   ########.fr       */
+/*   Created: 2023/10/10 17:02:55 by hlesny            #+#    #+#             */
+/*   Updated: 2023/10/11 00:15:42 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef BRAIN_HPP
-# define BRAIN_HPP
+#ifndef DOG_HPP
+# define DOG_HPP
 
-#include <iostream>
-#include <string>
+#include "A_Animal.hpp"
+#include "Brain.hpp"
 
-class Brain
+class Dog : public A_Animal
 {
-
-	public :
-		Brain();
-        Brain(const Brain& other);
-        Brain &operator=(const Brain& other);
-        void    addIdea(std::string newIdea);
-        void    printIdeas(void);
-        virtual ~Brain();
-    
-    protected :
-        size_t      _ideasCount;
-        std::string _ideas[100];
+	public:
+		Dog();
+        Dog(const Dog& other);
+        Dog &operator=(const Dog& other);
+        void    makeSound(void) const;
+        /* std::string getType(void) const; */
+        virtual ~Dog();
 
     private :
-		
+        Brain *_brain;
 };
 
 #endif

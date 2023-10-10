@@ -6,11 +6,11 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:05:08 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/11 00:02:08 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/11 00:15:13 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Animal.hpp"
+#include "../includes/A_Animal.hpp"
 #include "../includes/Cat.hpp"
 #include "../includes/Dog.hpp"
 #include "../includes/WrongAnimal.hpp"
@@ -19,9 +19,9 @@
 int main(void)
 {
     {
-        const Animal* meta = new Animal();
-        const Animal* j = new Dog();
-        const Animal* i = new Cat();
+        const A_Animal* meta = new A_Animal();
+        const A_Animal* j = new Dog();
+        const A_Animal* i = new Cat();
         std::cout << j->getType() << " " << std::endl;
         std::cout << i->getType() << " " << std::endl;
         i->makeSound(); //will output the cat sound!
@@ -36,7 +36,7 @@ int main(void)
     std::cout << "------------------------------------" << std::endl;
     {
         const WrongAnimal* meta = new WrongAnimal();
-        const Animal* j = new Dog();
+        const A_Animal* j = new Dog();
         const WrongAnimal* i = new WrongCat();
         std::cout << j->getType() << " " << std::endl;
         std::cout << i->getType() << " " << std::endl;
@@ -68,7 +68,7 @@ int main(void)
     std::cout << std::endl;
     {
         int n(4);
-        Animal *farm[n];
+        A_Animal *farm[n];
         for (int i = 0; i < n/2; i++)
             farm[i] = new Cat();
         for (int i = n/2; i < n; i++)

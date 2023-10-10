@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 20:00:35 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 23:36:23 by hlesny           ###   ########.fr       */
+/*   Created: 2023/10/10 19:24:58 by hlesny            #+#    #+#             */
+/*   Updated: 2023/10/10 19:39:14 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef BRAIN_HPP
-# define BRAIN_HPP
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
 #include <iostream>
 #include <string>
 
-class Brain
+class WrongAnimal
 {
 
 	public :
-		Brain();
-        Brain(const Brain& other);
-        Brain &operator=(const Brain& other);
-        void    addIdea(std::string newIdea);
-        void    printIdeas(void);
-        virtual ~Brain();
+		WrongAnimal();
+        WrongAnimal(const WrongAnimal& other);
+        WrongAnimal &operator=(const WrongAnimal& other);
+        virtual void    makeSound(void) const;
+        std::string getType(void) const;
+        virtual ~WrongAnimal();
     
     protected :
-        size_t      _ideasCount;
-        std::string _ideas[100];
-
+        std::string _type;
     private :
 		
 };

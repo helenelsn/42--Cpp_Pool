@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:20:28 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 20:06:25 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/10 22:33:09 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void    Dog::makeSound(void) const
 Dog::~Dog()
 {
     std::cout << "Dog: Destructor" << std::endl;
+    delete _brain;
 }

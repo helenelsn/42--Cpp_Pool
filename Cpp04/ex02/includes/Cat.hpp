@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:02:17 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 23:50:45 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/11 00:15:46 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #ifndef CAT_HPP
 # define CAT_HPP
 
-#include "Animal.hpp"
+#include "A_Animal.hpp"
 #include "Brain.hpp"
 
-class Cat : public Animal
+class Cat : public A_Animal
 {
 
 	public:

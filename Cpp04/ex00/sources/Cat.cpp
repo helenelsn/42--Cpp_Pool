@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:08:14 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 19:10:59 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/10 22:35:44 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void    Cat::makeSound(void) const
 Cat::~Cat()
 {
     std::cout << "Cat: Destructor" << std::endl;
+    delete _brain;
 }
