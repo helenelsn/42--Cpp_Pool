@@ -5,30 +5,45 @@
 #                                                     +:+ +:+         +:+      #
 #    By: Helene <Helene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/03 15:15:04 by Helene            #+#    #+#              #
-#    Updated: 2023/10/09 17:00:40 by Helene           ###   ########.fr        #
+#    Created: 2023/10/04 14:57:58 by Helene            #+#    #+#              #
+#    Updated: 2023/10/09 17:58:32 by Helene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = scav_trap
 CC = c++
-CFLAGS = -std=c++98 -Wall -Wextra -Werror -MMD # -g3
+CFLAGS = -std=c++98 -Wall -Wextra -Werror # -g3
 RM = rm -f
 
-SRCS = megaphone.cpp
-OBJS = $(SRCS:.cpp=.o)
-DEPS = $(SRCS:.cpp=.d)
+SRCS_DIR = ./sources/
+OBJS_DIR = ./objects/
+INCS_DIR = ./includes/
+
+SRCS = 	main.cpp \
+		ClapTrap.cpp \
+		ScavTrap.cpp
+		
+OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.cpp=.o))
+DEPS = $(addprefix $(OBJS_DIR), $(SRCS:.cpp=.d))
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $(OBJS)
+
+$(OBJS_DIR)%.o : $(SRCS_DIR)%.cpp
+	mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) -MMD -I $(INCS_DIR) -c $< -o $@
+
+-include $(DEPS)
 
 clean : 
-	$(RM) $(OBJS)
+	$(RM) -r $(OBJS_DIR)
 
 fclean : clean
 	$(RM) $(NAME)
 
-.PHONY : 
+re : fclean all
+
+.PHONY:
 	all clean fclean re

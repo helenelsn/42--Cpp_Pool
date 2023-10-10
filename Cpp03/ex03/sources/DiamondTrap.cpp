@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/09 18:48:18 by Helene            #+#    #+#             */
+/*   Updated: 2023/10/10 09:26:04 by Helene           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/DiamondTrap.hpp"
+
+DiamondTrap::DiamondTrap(std::string name)
+:   ClapTrap(name, 100, 50, 30)
+{
+    std::cout << "Constructor of DiamondTrap called" << std::endl;
+}
+
+DiamondTrap::DiamondTrap(DiamondTrap const& to_copy)
+:   ClapTrap(to_copy)
+{
+    std::cout << "Copy constructor of DiamondTrap called" << std::endl;
+}
+
+DiamondTrap DiamondTrap::operator=(DiamondTrap const& to_copy)
+{
+    // y a t il un moyen d'appeler la surcharge d'op de la classe parente ?
+    // Après de multiple test, je n'ai pas trouver comment faire et internet semble relativement d'accord avec moi. Tendrement, Aurèle
+    this->_name = to_copy._name;
+    this->_attackDamage = to_copy._attackDamage;
+    this->_energyPoints = to_copy._energyPoints;
+    this->_hitPoints = to_copy._hitPoints;
+    return (*this);
+}
+
+void DiamondTrap::highFivesGuys(void)
+{
+    std::cout << "Scat trap " << _name << " wishes to do a high fives" << std::endl;
+}
+
+DiamondTrap::~DiamondTrap()
+{
+    this->ClapTrap::~ClapTrap();
+    std::cout << "Destructor of DiamondTrap called" << std::endl;
+}

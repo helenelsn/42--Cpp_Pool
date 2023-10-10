@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:48:53 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/06 22:40:11 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/08 15:34:20 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ Point::~Point()
 
 std::ostream& operator<<(std::ostream& out, Point const& p)
 {
-    out << "( " << (p.get_x()).toFloat() << ", " << (p.get_x()).toFloat() << " )";
+    out << "( " << (p.get_x()).toFloat() << ", " << (p.get_y()).toFloat() << " )";
     return (out);
 }
