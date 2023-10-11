@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Helene <Helene@student.42.fr>              +#+  +:+       +#+         #
+#    By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:57:58 by Helene            #+#    #+#              #
-#    Updated: 2023/10/11 17:58:20 by Helene           ###   ########.fr        #
+#    Updated: 2023/10/11 22:07:03 by hlesny           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS = 	main.cpp \
 		Cure.cpp \
 		Ice.cpp \
 		Character.cpp \
-		MaterialSource.cpp 
+		MateriaSource.cpp 
 		
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.cpp=.o))
 DEPS = $(addprefix $(OBJS_DIR), $(SRCS:.cpp=.d))

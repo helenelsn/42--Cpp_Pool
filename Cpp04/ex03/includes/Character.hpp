@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:00:53 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/11 17:49:21 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/11 20:51:27 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class Character : public ICharacter
         virtual void equip(AMateria* m);
         virtual void unequip(int idx); // must not delete the materia (bc an instance of it still exists somewhere else)
         virtual void use(int idx, ICharacter& target);
+        void printInventory(void) const; // todel
         Character(const Character& other);
         Character &operator=(const Character& other);
         virtual ~Character();
