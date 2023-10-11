@@ -16,6 +16,7 @@ Example& Example::operator=(const Example& other) {
 	return *this;
 }
 
-Example::~Example() {
+Example::~Example()
+{
     std::cout << "Example: Destructor" << std::endl;
 }
