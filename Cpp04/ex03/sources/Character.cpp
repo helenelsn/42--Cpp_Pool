@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Character.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:01:19 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/11 21:35:01 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:09:46 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Character.hpp"
 
 Character::Character(/* args */)
-:	_name("default_character"),
+:	ICharacter(), // ?
+	_name("default_character"),
 	_count(0)
 {
 	for (int i = 0; i < 4; i++)
@@ -22,7 +23,8 @@ Character::Character(/* args */)
 }
 
 Character::Character(std::string const& name)
-:	_name(name),
+:	ICharacter(), // ?
+	_name(name),
 	_count(0)
 {
 	for (int i = 0; i < 4; i++)
@@ -38,30 +40,38 @@ void Character::equip(AMateria* newMateria)
 {
 	if (_count == 4)
 		return ;
-	_inventory[_count] = newMateria;
+	for (int i = 0; i < 4; i++)
+	{
+		if (!_inventory[i])
+		{
+			_inventory[i] = newMateria;
+			break;
+		}
+	}
 	_count++;
 }
 
 void Character::unequip(int idx)
 {
-	if (idx < 0 || (unsigned int)idx >= _count)
+	if (idx < 0 || (unsigned int)idx > 4 || !_inventory[idx])
 		return ;
-	int i;
 	/* std::cout << "idx = " << idx << std::endl;
 	std::cout << " ------ before : " << std::endl;
 	printInventory(); */
-	for (i = idx; (unsigned int)i < _count - 1; i++)
-		_inventory[i] = _inventory[i + 1];
-	_inventory[i] = 0;
+	// int i;
+	// for (i = idx; (unsigned int)i < _count - 1; i++)
+	// 	_inventory[i] = _inventory[i + 1];
+	// _inventory[i] = 0;
+	_inventory[idx] = 0;
 	_count--;
 	/* std::cout << " ------ after : " << std::endl;
-	printInventory(); */
-	std::cout << std::endl;
+	printInventory();
+	std::cout << std::endl; */
 }
 
 void Character::use(int idx, ICharacter& target)
 {
-	if (idx < 0 || (unsigned int)idx >= _count)
+	if (idx < 0 || (unsigned int)idx >4)
 		return ;
 	_inventory[idx]->use(target);
 }
@@ -81,37 +91,53 @@ Character::Character(const Character& other) {
 
 	std::cout << "Character: Copy constructor" << std::endl;
 	
-	_name = other._name;
-	_count = other._count;
-	for (unsigned int i = 0; i < _count; i++)
-	{
-		delete _inventory[i];
-		if (_inventory[i])
-			_inventory[i] = other._inventory[i]->clone();
-		else
-			_inventory[i] = NULL;
-	}
+	// _name = other._name;
+	// _count = other._count;
+	// for (unsigned int i = 0; i < _count; i++)
+	// {
+	// 	delete _inventory[i];
+	// 	if (_inventory[i])
+	// 		_inventory[i] = other._inventory[i]->clone();
+	// 	else
+	// 		_inventory[i] = NULL;
+	// }
+	
+	*this = other;
 }
 
+/* During copy, the Materias of a Character must be deleted before the new ones are added
+to their inventory*/
 Character& Character::operator=(const Character& other) {
-    
+	
 	std::cout << "Character: Assignment operator" << std::endl;
+    if (this == &other)
+		return (*this);
 	_name = other._name;
 	_count = other._count;
-	for (unsigned int i = 0; i < _count; i++)
+	 this->~Character();
+	// for (int i = 0; i < 4; i++)
+	// {
+	// 	delete _inventory[i];
+	// 	_inventory[i] = 0;
+	// }
+	std::cout << "ok here too" << std::endl;
+	for (unsigned int i = 0; i < 4; i++)
 	{
-		delete _inventory[i];
-		if (_inventory[i])
+		if (other._inventory[i])
 			_inventory[i] = other._inventory[i]->clone();
 		else
-			_inventory[i] = NULL;
+			_inventory[i] = 0;
 	}
-	return *this;
+	return (*this);
 }
 
+/*  The Materias must be deleted when a Character is destroyed */
 Character::~Character()
 {
     std::cout << "Character: Destructor" << std::endl;
-	/* AMateria mustn't be desallocated in this class, as an instance still exists
-	somewhere else*/
+	for (int i = 0; i < 4; i++)
+	{
+		delete _inventory[i];
+		_inventory[i] = 0;
+	}
 }

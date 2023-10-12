@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MateriaSource.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 19:17:36 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/11 19:27:55 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:06:59 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 #include "AMateria.hpp"
 #include "Cure.hpp"
 #include "Ice.hpp"
+#include "IMateriaSource.hpp"
 
-class MateriaSource
+class MateriaSource : public IMateriaSource
 {
 
 	public :
@@ -32,8 +33,8 @@ class MateriaSource
     protected :
 
     private :
-		AMateria	*_materias[4];
-		unsigned int _count;
+		  AMateria	*_materias[4];
+		  unsigned int _count;
 };
 
 #endif

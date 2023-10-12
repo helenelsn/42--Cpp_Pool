@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 17:30:47 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/11 23:54:40 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:11:21 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int main( void )
 {
-    {
+    /*{
         Cure c;
         AMateria *i = new Ice();
         AMateria *j = new Cure();
@@ -75,15 +75,27 @@ int main( void )
         for (int i = 0; i < 4; i++)
             pik->use(i, *dra);
         
-    }
-    {
+    } */
+    /*{
         ICharacter *pika = new Character("pikachu");
         ICharacter *draco(pika);
+
         
-        pika->getName();
-        draco->getName();
+        std::cout <<  pika->getName() << std::endl;
+        std::cout <<  draco->getName() << std::endl;
         delete pika;
-        draco->getName(); 
+        pika = NULL;
+        std::cout << "ok here" << std::endl;
+        std::cout <<  draco->getName() << std::endl;
+    }*/
+    {
+        ICharacter *pika = new Character("pikachu");
+        AMateria *ice = new Ice();
+        IMateriaSource *mat_s = new MateriaSource();
+        
+        std::cout << "----" << std::endl;
+        mat_s->learnMateria(ice);
+        pika->equip(mat_s->createMateria("ice"));
     }
 
     
