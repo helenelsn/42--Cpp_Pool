@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:31:50 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/06 19:37:53 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/12 16:48:54 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,31 @@ int const   Fixed::_nbFractionalBits = 8;
 Fixed::Fixed()
 :   _value(0)
 {
-    std::cout << "Default constructor called" << std::endl;
+    // std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int n)
 :   _value(n << _nbFractionalBits)
 {
-    std::cout << "Int constructor called" << std::endl;
+    // std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const double n)
 :   _value(roundf(n * (1 << _nbFractionalBits)))
 {
-    std::cout << "Float constructor called" << std::endl;
+    // std::cout << "Float constructor called" << std::endl;
 }
 
 
 Fixed::Fixed(Fixed const& to_copy)
 {
-    std::cout << "Copy constructor called" << std::endl;
+    // std::cout << "Copy constructor called" << std::endl;
     *this = to_copy;
 }
 
 Fixed::~Fixed()
 {
-    std::cout << "Destructor called" << std::endl;
+    // std::cout << "Destructor called" << std::endl;
 }
 
 int     Fixed::getRawBits( void ) const
@@ -68,7 +68,7 @@ int		Fixed::toInt( void ) const
 
 Fixed &Fixed::operator=(Fixed const& to_copy)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Copy assignment operator called" << std::endl;
     setRawBits(to_copy.getRawBits());
     return (*this);
 }
@@ -110,7 +110,7 @@ const Fixed Fixed::operator+(Fixed const& n)
 
 const Fixed Fixed::operator-(Fixed const& n)
 {
-    return (Fixed(n.toFloat() - this->toFloat()));
+    return (Fixed(this->toFloat() - n.toFloat()));
 }
 
 const Fixed Fixed::operator*(Fixed const& n)
@@ -120,7 +120,12 @@ const Fixed Fixed::operator*(Fixed const& n)
 
 const Fixed Fixed::operator/(Fixed const& n)
 {
-    return (Fixed(n.toFloat() / this->toFloat()));
+    if (!n.toFloat())
+    {
+        std::cerr << "Division by zero not allowed" << std::endl;
+        return Fixed();
+    }
+    return (Fixed(this->toFloat() / n.toFloat()));
 }
 
 Fixed &Fixed::operator++(void)

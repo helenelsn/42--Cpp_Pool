@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:55:55 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/06 19:02:59 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:40:00 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main( void )
 	Zombie	*zozo = newZombie("zozo");
 	zozo->announce();
 	randomChump("zaza");
+	
 	delete zozo;
 	zozo = NULL;
 	return (0);

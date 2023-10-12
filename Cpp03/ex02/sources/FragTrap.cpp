@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:41:54 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/09 18:45:04 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/12 17:43:25 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void FragTrap::highFivesGuys(void)
 
 FragTrap::~FragTrap()
 {
-    this->ClapTrap::~ClapTrap();
+    //this->ClapTrap::~ClapTrap();
     std::cout << "Destructor of FragTrap called" << std::endl;
 }

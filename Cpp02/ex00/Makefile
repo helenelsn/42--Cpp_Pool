@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+         #
+#    By: Helene <Helene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:57:58 by Helene            #+#    #+#              #
-#    Updated: 2023/10/05 18:31:28 by hlesny           ###   ########.fr        #
+#    Updated: 2023/10/12 16:12:13 by Helene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = executabl_name
+NAME = fixed_points
 CC = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror # -g3
 RM = rm -f

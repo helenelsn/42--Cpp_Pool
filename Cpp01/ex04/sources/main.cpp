@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 18:16:12 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/06 19:06:02 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:57:30 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <string> // c_str
 
 #define PARSE_ERROR 1
+
+
 
 int main(int argc, char **argv)
 {
@@ -31,8 +33,6 @@ int main(int argc, char **argv)
     
     std::ifstream file(argv[1]);
     std::ofstream fileReplace((std::string(argv[1]).append(".replace")).c_str());
-    /* file.open(, std::fstream::in);
-    file.open(std::string(argv[1]).append(".replace"), std::fstream::out); */
     
     size_t index;
     std::string line;

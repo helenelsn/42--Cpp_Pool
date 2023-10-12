@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:00:35 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/09 18:45:08 by Helene           ###   ########.fr       */
+/*   Updated: 2023/10/12 17:43:19 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void ScavTrap::guardGate(void)
 
 ScavTrap::~ScavTrap()
 {
-    this->ClapTrap::~ClapTrap();
+    //this->ClapTrap::~ClapTrap();
     std::cout << "Destructor of ScavTrap called" << std::endl;
 }
