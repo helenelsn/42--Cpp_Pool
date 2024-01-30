@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 16:43:26 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/04 17:09:38 by Helene           ###   ########.fr       */
+/*   Updated: 2024/01/19 18:50:54 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Weapon::Weapon(std::string type)
 Weapon::~Weapon()
 {}
 
-std::string Weapon::getType( void ) const
+const std::string& Weapon::getType( void ) const
 {
     return (_type);
 }

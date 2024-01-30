@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 16:40:25 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/04 17:09:41 by Helene           ###   ########.fr       */
+/*   Updated: 2024/01/19 18:44:58 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Weapon
     public :
         Weapon(std::string type = "");
         ~Weapon();
-        std::string getType( void ) const;
+        const std::string& getType( void ) const;
         void setType(std::string type);
 
     private :

@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:31:50 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/12 16:48:54 by Helene           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:18:55 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ float	Fixed::toFloat( void ) const
 
 int		Fixed::toInt( void ) const
 {
-    return (_value >> _nbFractionalBits);
+    return ((int)roundf(_value / pow(2, _nbFractionalBits)));
 }
 
 Fixed &Fixed::operator=(Fixed const& to_copy)

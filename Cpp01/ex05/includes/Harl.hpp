@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:02:22 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/04 21:13:51 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/01/19 19:44:03 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 
 class Harl
 {
-  public :
-    Harl();
-    ~Harl();
-    void complain( std::string level );
+  	public :
+    	Harl();
+    	~Harl();
+    	void complain( std::string level );
 
-  private :
-    void	debug( void );
-	void	info( void );
-	void	warning( void );
-	void	error( void );
+  	private :
+		void debug( void );
+		void info( void );
+		void warning( void );
+		void error( void );
 };
 
 #endif
