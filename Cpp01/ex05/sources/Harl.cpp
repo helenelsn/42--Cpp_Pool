@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:07:59 by hlesny            #+#    #+#             */
-/*   Updated: 2024/01/19 19:55:20 by Helene           ###   ########.fr       */
+/*   Updated: 2024/01/30 21:50:35 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void Harl::complain( std::string level )
 
     void (Harl::*f[4]) (void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
     size_t index = getIndex(level);
-    if (index < 5)
-        (this->*f[index - 1])();
+    if (index < 4)
+        (this->*f[index])();
     else
         std::cout << "Not a HARL level. Try again." << std::endl;
     

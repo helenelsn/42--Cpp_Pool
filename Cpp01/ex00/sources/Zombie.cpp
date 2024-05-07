@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:55:25 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/04 16:15:18 by Helene           ###   ########.fr       */
+/*   Updated: 2024/01/30 17:12:14 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void    Zombie::announce( void )
 
 Zombie::Zombie(std::string zombieName)
 : _name(zombieName)
-{}
+{
+    std::cout << _name << " was created." << std::endl;
+}
 
 Zombie::~Zombie()
 {

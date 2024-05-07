@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:48:18 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/10 16:47:49 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/02/05 22:25:53 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,44 @@
 /* le soin d’initialiser les super-classes virtuelles incombe à la sous-classe la plus
 dérivée */
 DiamondTrap::DiamondTrap(std::string name)
-:   ClapTrap(name + "_clap_trap"),
-    ScavTrap(name + "_clap_trap"),
-    FragTrap(name + "_clap_trap"),
+:   ClapTrap(name + "_clap_trap", 100, 50, 30),
+    ScavTrap(),
+    FragTrap(),
     _name(name)
 {
-    _attackDamage = 30;
-    _energyPoints = 100; /* y a pas une meilleure maniere de faire ? */
     std::cout << "Constructor of DiamondTrap called" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(DiamondTrap const& to_copy)
-:   ClapTrap(to_copy)
+:   ClapTrap(to_copy),
+    _name(to_copy._name)
 {
     std::cout << "Copy constructor of DiamondTrap called" << std::endl;
 }
 
-DiamondTrap DiamondTrap::operator=(DiamondTrap const& to_copy)
+DiamondTrap &DiamondTrap::operator=(DiamondTrap const& to_copy)
 {
-    // y a t il un moyen d'appeler la surcharge d'op de la classe parente ?
-    // Après de multiple test, je n'ai pas trouver comment faire et internet semble relativement d'accord avec moi. Tendrement, Aurèle
+    this->ClapTrap::operator=(to_copy);
     this->_name = to_copy._name;
-    this->_attackDamage = to_copy._attackDamage;
-    this->_energyPoints = to_copy._energyPoints;
-    this->_hitPoints = to_copy._hitPoints;
+    // this->_attackDamage = to_copy._attackDamage;
+    // this->_energyPoints = to_copy._energyPoints;
+    // this->_hitPoints = to_copy._hitPoints;
     return (*this);
-}
-
-void DiamondTrap::attack(const std::string& target)
-{
-   ScavTrap::attack(target);
 }
 
 void    DiamondTrap::WhoAmI(void)
 {
-    std::cout << "My name is : " << _name;
-    std::cout << ", and my ClapTrap name : " << ClapTrap::_name << std::endl;
+    std::cout << "My name is : " << getName();
+    std::cout << ", and my ClapTrap name is : " << ClapTrap::getName() << std::endl;
+    std::cout << "I have " << _hitPoints << " hit points, " << _energyPoints << " energy points, and " << _attackDamage << " damage points" << std::endl;
+}
+
+std::string DiamondTrap::getName() const
+{
+    return (DiamondTrap::_name);
 }
 
 DiamondTrap::~DiamondTrap()
 {
-    this->ClapTrap::~ClapTrap();
     std::cout << "Destructor of DiamondTrap called" << std::endl;
 }

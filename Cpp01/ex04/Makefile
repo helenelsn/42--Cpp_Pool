@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Helene <Helene@student.42.fr>              +#+  +:+       +#+         #
+#    By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:57:58 by Helene            #+#    #+#              #
-#    Updated: 2023/10/04 18:12:01 by Helene           ###   ########.fr        #
+#    Updated: 2024/01/30 18:55:33 by hlesny           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = replace
 CC = c++
-CFLAGS = -std=c++98 -Wall -Wextra -Werror # -g3
+CFLAGS = -std=c++98 -Wall -Wextra -Werror  -g3
 RM = rm -f
 
 SRCS_DIR = ./sources/
