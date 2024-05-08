@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 23:26:06 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 00:26:02 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/08 00:59:38 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class Form
         int const _gradeToExec;
 
 	public :
-		Form(std::string const& name, int gradeToSign, int gradeToExec);
+		Form(std::string const& name = "default form", int gradeToSign = 80, int gradeToExec = 20);
         Form(const Form& other);
         Form &operator=(const Form& other);
         std::string const getName() const;
