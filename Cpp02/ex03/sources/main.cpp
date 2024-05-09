@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:58:58 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/12 16:54:02 by Helene           ###   ########.fr       */
+/*   Updated: 2024/02/02 20:51:12 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Point.hpp"
 
-bool bsp( Point const& x, Point const& y, Point const& z, Point const& point);
+bool bsp( Point const x, Point const y, Point const z, Point const point);
 
 int main( void )
 {

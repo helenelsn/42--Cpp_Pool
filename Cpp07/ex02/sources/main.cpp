@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:39:58 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/09 17:58:50 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/10 01:21:04 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int main()
 {
     Array<int> tab(6);
+    Array<int>  test(tab);
         
     std::cout << tab << std::endl; 
     tab[3] = 134;

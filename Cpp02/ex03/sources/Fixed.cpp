@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:31:50 by hlesny            #+#    #+#             */
-/*   Updated: 2024/01/19 20:19:07 by Helene           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:36:15 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Fixed::Fixed(const int n)
     //std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const double n)
+Fixed::Fixed(const float n)
 :   _value(roundf(n * (1 << _nbFractionalBits)))
 {
     //std::cout << "Float constructor called" << std::endl;
@@ -118,12 +118,12 @@ Fixed Fixed::operator*(Fixed const& n)
     return (Fixed(n.toFloat() * this->toFloat()));
 }
 
-Fixed Fixed::operator*(double a)
+Fixed Fixed::operator*(float a)
 {
     return (Fixed(a * this->toFloat()));
 }
 
-// const Fixed operator*(double a, Fixed const& n)
+// const Fixed operator*(float a, Fixed const& n)
 // {
 //     return (n * a);
 // }

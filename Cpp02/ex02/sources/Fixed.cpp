@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:31:50 by hlesny            #+#    #+#             */
-/*   Updated: 2024/01/19 20:18:55 by Helene           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:55:06 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,20 @@ Fixed::Fixed(const int n)
     // std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const double n)
-:   _value(roundf(n * (1 << _nbFractionalBits)))
+Fixed::Fixed(const float n)
+:   _value((int)roundf(n * (1 << _nbFractionalBits)))
 {
-    // std::cout << "Float constructor called" << std::endl;
+    std::cout << "Float constructor called" << std::endl;
+    int exp_mask = 0x7f800000;
+    float f = n;
+    int *test = (int *)&f;
+    *test = *test & exp_mask;
+    *test = *test >> 23;
+    if (*test == 0xff)
+    {
+        setRawBits(0);
+        std::cerr << "Nan or Infinity, raw value set to zero." << std::endl; 
+    }
 }
 
 
@@ -56,17 +66,22 @@ void    Fixed::setRawBits( int const raw )
     _value = raw;
 }
 
+/* In general, mathematically, given a fixed binary point position, 
+shifting the bit pattern of a number to the right by 1 bit always divide the number by 2.
+Similarly, shifting a number to the left by 1 bit multiplies the number by 2. */
 float	Fixed::toFloat( void ) const
 {
+    // return (float(_value / pow(2, _nbFractionalBits)));
     return (float((float)_value / (1 << _nbFractionalBits)));
 }
 
 int		Fixed::toInt( void ) const
 {
-    return ((int)roundf(_value / pow(2, _nbFractionalBits)));
+    // return ((int)roundf(_value / pow(2, _nbFractionalBits)));
+    return ((int)(roundf(_value / (1 << _nbFractionalBits))));
 }
 
-Fixed &Fixed::operator=(Fixed const& to_copy)
+const Fixed &Fixed::operator=(Fixed const& to_copy)
 {
     // std::cout << "Copy assignment operator called" << std::endl;
     setRawBits(to_copy.getRawBits());
@@ -80,7 +95,7 @@ bool Fixed::operator>(Fixed const& n)
 
 bool Fixed::operator<(Fixed const& n)
 {
-    return (!((*this) > n));
+    return (!(*this > n) && !(*this == n));
 }
 
 bool Fixed::operator>=(Fixed const& n)
@@ -103,22 +118,23 @@ bool Fixed::operator==(Fixed const& n)
     return (this->getRawBits() == n.getRawBits());
 }
 
-const Fixed Fixed::operator+(Fixed const& n)
+// const ?
+Fixed Fixed::operator+(Fixed const& n)
 {
     return (Fixed(n.toFloat() + this->toFloat()));
 }
 
-const Fixed Fixed::operator-(Fixed const& n)
+Fixed Fixed::operator-(Fixed const& n)
 {
     return (Fixed(this->toFloat() - n.toFloat()));
 }
 
-const Fixed Fixed::operator*(Fixed const& n)
+Fixed Fixed::operator*(Fixed const& n)
 {
     return (Fixed(n.toFloat() * this->toFloat()));
 }
 
-const Fixed Fixed::operator/(Fixed const& n)
+Fixed Fixed::operator/(Fixed const& n)
 {
     if (!n.toFloat())
     {
@@ -162,11 +178,11 @@ Fixed &Fixed::min(Fixed &a, Fixed &b)
     return (b);
 }
 
-const Fixed &Fixed::min(Fixed const&a, Fixed const&b)
+Fixed &Fixed::min(Fixed const&a, Fixed const&b)
 {
     if (a.getRawBits() < b.getRawBits())
-        return (a);
-    return (b);
+        return ((Fixed &)a);
+    return ((Fixed &)b);
 }
 
 Fixed &Fixed::max(Fixed &a, Fixed &b)
@@ -176,11 +192,11 @@ Fixed &Fixed::max(Fixed &a, Fixed &b)
     return (b);
 }
 
-const Fixed &Fixed::max(Fixed const&a, Fixed const&b)
+Fixed &Fixed::max(Fixed const&a, Fixed const&b)
 {
     if (a.getRawBits() > b.getRawBits())
-        return (a);
-    return (b);
+        return ((Fixed &)a);
+    return ((Fixed &)b);
 }
 
 

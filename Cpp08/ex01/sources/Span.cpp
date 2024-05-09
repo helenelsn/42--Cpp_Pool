@@ -1,21 +1,33 @@
-#include "../includes/Example.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Span.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/09 23:36:01 by hlesny            #+#    #+#             */
+/*   Updated: 2024/05/09 23:37:10 by hlesny           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-Example::Example(/* args */)
+#include "../includes/Span.hpp"
+
+Span::Span(unsigned int n) : _max(n)
 {
-	std::cout << "Example: Default constructor" << std::endl;
+	std::cout << "Span: Default constructor" << std::endl;
 }
 
-Example::Example(const Example& other) {
+Span::Span(const Span& other) {
 
-	std::cout << "Example: Copy constructor" << std::endl;
+	std::cout << "Span: Copy constructor" << std::endl;
 }
 
-Example& Example::operator=(const Example& other) {
+Span& Span::operator=(const Span& other) {
     
-	std::cout << "Example: Assignment operator" << std::endl;
+	std::cout << "Span: Assignment operator" << std::endl;
 	return *this;
 }
 
-Example::~Example() {
-    std::cout << "Example: Destructor" << std::endl;
+Span::~Span() {
+    std::cout << "Span: Destructor" << std::endl;
 }

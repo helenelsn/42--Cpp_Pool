@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:24:58 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 19:39:14 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:19:36 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class WrongAnimal
 		WrongAnimal();
         WrongAnimal(const WrongAnimal& other);
         WrongAnimal &operator=(const WrongAnimal& other);
-        virtual void    makeSound(void) const;
+        void    makeSound(void) const;
         std::string getType(void) const;
         virtual ~WrongAnimal();
     

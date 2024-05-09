@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:32:55 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/06 14:00:44 by Helene           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:34:43 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Fixed
     public :
         Fixed();
         Fixed(const int n);
-        Fixed(const double n);
+        Fixed(const float n);
         Fixed(Fixed const& to_copy);
         Fixed& operator=(Fixed const&fNumber);
         ~Fixed();

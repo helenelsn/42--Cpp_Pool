@@ -3,29 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:31:50 by hlesny            #+#    #+#             */
-/*   Updated: 2024/01/19 20:18:32 by Helene           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:40:57 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Fixed.hpp"
 
 int const   Fixed::_nbFractionalBits = 8;
-
-std::ostream&    operator<<(std::ostream &stream, Fixed const& n)
-{
-    stream << n.toFloat();
-    return (stream);
-}
-
-Fixed &Fixed::operator=(Fixed const& to_copy)
-{
-    std::cout << "Copy assignment operator called" << std::endl;
-    setRawBits(to_copy.getRawBits());
-    return (*this);
-}
 
 Fixed::Fixed()
 :   _value(0)
@@ -39,10 +26,19 @@ Fixed::Fixed(const int n)
     std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const double n)
-:   _value(roundf(n * (1 << _nbFractionalBits))) //_value(roundf(n * pow(2, _nbFractionalBits)))
+Fixed::Fixed(const float n)
+:   _value((int)(roundf(n * (1 << _nbFractionalBits)))) //_value(roundf(n * pow(2, _nbFractionalBits)))
 {
     std::cout << "Float constructor called" << std::endl;
+    int exp_mask = 0x7f800000;
+    int *test = (int *)&n;
+    *test = *test & exp_mask;
+    *test = *test >> 23;
+    if (*test == 0xff)
+    {
+        setRawBits(0);
+        std::cerr << "Nan or Infinity, raw value set to zero." << std::endl; 
+    }
 }
 
 
@@ -57,6 +53,18 @@ Fixed::~Fixed()
     std::cout << "Destructor called" << std::endl;
 }
 
+std::ostream&    operator<<(std::ostream &stream, Fixed const& n)
+{
+    stream << n.toFloat();
+    return (stream);
+}
+
+Fixed &Fixed::operator=(Fixed const& to_copy)
+{
+    std::cout << "Copy assignment operator called" << std::endl;
+    setRawBits(to_copy.getRawBits());
+    return (*this);
+}
 
 int     Fixed::getRawBits( void ) const
 {
@@ -66,6 +74,7 @@ int     Fixed::getRawBits( void ) const
 
 void    Fixed::setRawBits( int const raw )
 {
+    std::cout << "setRawBits member function called" << std::endl;
     _value = raw;
 }
 
@@ -74,12 +83,13 @@ shifting the bit pattern of a number to the right by 1 bit always divide the num
 Similarly, shifting a number to the left by 1 bit multiplies the number by 2. */
 float	Fixed::toFloat( void ) const
 {
-    return (float(_value / pow(2, _nbFractionalBits)));
-    //return (float((float)_value / (1 << _nbFractionalBits)));
+    // return (float(_value / pow(2, _nbFractionalBits)));
+    return (float((float)_value / (1 << _nbFractionalBits)));
 }
 
 int		Fixed::toInt( void ) const
 {
-    return ((int)roundf(_value / pow(2, _nbFractionalBits)));
+    // return ((int)roundf(_value / pow(2, _nbFractionalBits)));
+    return ((int)(roundf(_value / (1 << _nbFractionalBits))));
 }
 

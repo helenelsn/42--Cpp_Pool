@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 23:51:07 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/09 13:38:24 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/10 01:09:59 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <string>
 
 template<typename T>
-void iter(T *array, size_t length, void (*f)(T&))
+void iter(T *array, size_t length, void (*f)(T&)) 
 {
     for (size_t i = 0; i < length; i++)
         f(array[i]);

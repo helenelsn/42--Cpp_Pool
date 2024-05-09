@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:32:55 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/07 21:22:47 by Helene           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:35:15 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Fixed
     public :
         Fixed();
         Fixed(const int n);
-        Fixed(const double n);
+        Fixed(const float n);
         Fixed(Fixed const& to_copy);
         Fixed& operator=(Fixed const&fNumber);
         bool operator>(Fixed const& n);
@@ -37,7 +37,7 @@ class Fixed
         Fixed operator-(Fixed const& n);
         Fixed operator*(Fixed const& n);
         Fixed operator/(Fixed const& n);
-        Fixed operator*(double a);
+        Fixed operator*(float a);
         Fixed &operator++(void); /* ++p */
         Fixed operator++(int); /* p++ */
         Fixed &operator--(void); /* --p */
@@ -58,6 +58,6 @@ class Fixed
 };
 
 std::ostream& operator<<(std::ostream &stream, Fixed const& n);
-//const Fixed operator*(double a, Fixed const& n);
+//const Fixed operator*(float a, Fixed const& n);
 
 #endif

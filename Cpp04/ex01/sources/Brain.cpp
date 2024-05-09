@@ -6,13 +6,13 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:01:01 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 23:48:59 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/02/06 21:05:50 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Brain.hpp"
 
-Brain::Brain(/* args */)
+Brain::Brain()
 :	_ideasCount(0)
 {
 	std::cout << "Brain: Default constructor" << std::endl;
@@ -21,14 +21,18 @@ Brain::Brain(/* args */)
 Brain::Brain(const Brain& other) {
 
 	std::cout << "Brain: Copy constructor" << std::endl;
-	std::copy(other._ideas, other._ideas + 100, this->_ideas);
-	_ideasCount = other._ideasCount;
+	// std::copy(other._ideas, other._ideas + 100, this->_ideas);
+	// _ideasCount = other._ideasCount;
+	*this = other;
 }
 
-Brain& Brain::operator=(const Brain& other) {
+Brain& Brain::operator=(const Brain& other)
+{
     
 	std::cout << "Brain: Assignment operator" << std::endl;
-	std::copy(other._ideas, other._ideas + 100, this->_ideas);
+	// std::copy(other._ideas, other._ideas + 100, this->_ideas);
+	for (size_t i = 0; i < 100; i++)
+		_ideas[i] = other._ideas[i];
 	_ideasCount = other._ideasCount;
 	return *this;
 }

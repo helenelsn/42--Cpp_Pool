@@ -6,7 +6,7 @@
 #    By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:57:58 by Helene            #+#    #+#              #
-#    Updated: 2023/10/10 20:02:37 by hlesny           ###   ########.fr        #
+#    Updated: 2024/02/06 21:21:28 by hlesny           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJS_DIR = ./objects/
 INCS_DIR = ./includes/
 
 SRCS = 	main.cpp \
-		Animal.cpp \
+		A_Animal.cpp \
 		Cat.cpp \
 		Dog.cpp \
 		WrongAnimal.cpp \

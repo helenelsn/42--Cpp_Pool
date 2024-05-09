@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ICharacter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:00:12 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/12 14:52:50 by Helene           ###   ########.fr       */
+/*   Updated: 2024/02/06 22:41:26 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ class ICharacter
         virtual void unequip(int idx) = 0;
         virtual void use(int idx, ICharacter& target) = 0;
         virtual void printInventory(void) const = 0; // todel
-    // protected: 
-    //     std::string _name; // ? idk
 };
 
 #endif

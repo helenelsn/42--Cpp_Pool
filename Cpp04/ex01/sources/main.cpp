@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:05:08 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/11 00:02:08 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/02/06 21:50:02 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,49 +19,19 @@
 int main(void)
 {
     {
-        const Animal* meta = new Animal();
-        const Animal* j = new Dog();
-        const Animal* i = new Cat();
-        std::cout << j->getType() << " " << std::endl;
-        std::cout << i->getType() << " " << std::endl;
-        i->makeSound(); //will output the cat sound!
-        j->makeSound();
-        meta->makeSound();
-
-        delete i;
-        delete j;
-        delete meta;
-        
-    }
-    std::cout << "------------------------------------" << std::endl;
-    {
-        const WrongAnimal* meta = new WrongAnimal();
-        const Animal* j = new Dog();
-        const WrongAnimal* i = new WrongCat();
-        std::cout << j->getType() << " " << std::endl;
-        std::cout << i->getType() << " " << std::endl;
-        i->makeSound(); //will output the cat sound!
-        j->makeSound();
-        meta->makeSound();
-
-        delete i;
-        delete j;
-        delete meta;
-    }
-    std::cout << std::endl;
-    std::cout << "----------------------------------------------" << std::endl;
-    std::cout << std::endl;
-    {
         Cat *i = new Cat();
         Cat *j = new Cat();
         i->addIdea("first one");
         j->addIdea("youhou");
         i->printIdeas();
         j->printIdeas();
-        Cat *k(j);
+        Cat *k = new Cat();
+        *k = *i;
         k->printIdeas();
-        j->~Cat();
+        delete i;
         k->printIdeas();
+        delete j;
+        delete k;
     }
     std::cout << std::endl;
     std::cout << "----------------------------------------------" << std::endl;

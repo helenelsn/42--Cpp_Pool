@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:08:14 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 22:35:44 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:12:36 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ Cat::Cat()
 }
 
 Cat::Cat(const Cat& other) {
-    _type = other._type;
 	std::cout << "Cat: Copy constructor" << std::endl;
+    _type = other._type;
 }
 
 Cat& Cat::operator=(const Cat& other) {
@@ -31,11 +31,11 @@ Cat& Cat::operator=(const Cat& other) {
 
 void    Cat::makeSound(void) const
 {
-    std::cout << "meow" << std::endl;
+    std::cout << "Meow" << std::endl;
 }
 
 Cat::~Cat()
 {
     std::cout << "Cat: Destructor" << std::endl;
-    delete _brain;
+    // delete _brain;
 }

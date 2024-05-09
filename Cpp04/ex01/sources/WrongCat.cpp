@@ -6,13 +6,13 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:24:33 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 19:57:54 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:20:42 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/WrongCat.hpp"
 
-WrongCat::WrongCat(/* args */)
+WrongCat::WrongCat()
 {
 	_type = "Wrong cat";
 	std::cout << "WrongCat: Default constructor" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:32:55 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/06 19:33:19 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:53:13 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,27 @@ class Fixed
     public :
         Fixed();
         Fixed(const int n);
-        Fixed(const double n);
+        Fixed(const float n);
         Fixed(Fixed const& to_copy);
-        Fixed& operator=(Fixed const&fNumber);
+        const Fixed& operator=(Fixed const&fNumber);
         bool operator>(Fixed const& n);
         bool operator<(Fixed const& n);
         bool operator>=(Fixed const& n);
         bool operator<=(Fixed const& n);
         bool operator!=(Fixed const& n);
         bool operator==(Fixed const& n);
-        const Fixed operator+(Fixed const& n);
-        const Fixed operator-(Fixed const& n);
-        const Fixed operator*(Fixed const& n);
-        const Fixed operator/(Fixed const& n);
+        Fixed operator+(Fixed const& n);
+        Fixed operator-(Fixed const& n);
+        Fixed operator*(Fixed const& n);
+        Fixed operator/(Fixed const& n);
         Fixed &operator++(void); /* ++p */
         Fixed operator++(int); /* p++ */
         Fixed &operator--(void); /* --p */
         Fixed operator--(int); /* p-- */
         static Fixed &min(Fixed &a, Fixed &b);
-        const static Fixed &min(Fixed const&a, Fixed const&b);
+        static Fixed &min(Fixed const&a, Fixed const&b);
         static Fixed &max(Fixed &a, Fixed &b);
-        const static Fixed &max(Fixed const&a, Fixed const&b);
+        static Fixed &max(Fixed const&a, Fixed const&b);
         int     getRawBits( void ) const;
         void    setRawBits( int const raw );
         float	toFloat( void ) const;

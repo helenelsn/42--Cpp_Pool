@@ -6,13 +6,13 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:24:39 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 19:56:40 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:20:33 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal(/* args */)
+WrongAnimal::WrongAnimal()
 :	_type("Wrong animal")
 {
 	std::cout << "WrongAnimal: Default constructor" << std::endl;

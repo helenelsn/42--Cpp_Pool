@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:58:58 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/12 16:50:10 by Helene           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:58:13 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int main( void )
    { 
         Fixed a( Fixed( 5.05f ) * Fixed( 2 ) );
         Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-        Fixed c;
-        Fixed test(-142.55f);
+        Fixed c(2.0f);
+        Fixed test(NAN);
+        // Fixed test(-142.55f);
         
         std::cout << "a = " << a << std::endl;
         std::cout << "b = " << b << std::endl;
@@ -63,30 +64,30 @@ int main( void )
         std::cout << c << std::endl << std::endl;
         
         /* [+*-/] operators */
-        std::cout << test << " + " << a << " = " << test + a << std::endl;
-        std::cout << test << " - " << a << " = " << test - a << std::endl;
-        std::cout << test << " * " << a << " = " << test * a << std::endl;
-        std::cout << test << " / " << a << " = " << test / a << std::endl;
+        // std::cout << test << " + " << a << " = " << test + a << std::endl;
+        // std::cout << test << " - " << a << " = " << test - a << std::endl;
+        // std::cout << test << " * " << a << " = " << test * a << std::endl;
+        // std::cout << test << " / " << a << " = " << test / a << std::endl;
         std::cout << a << " + " << c << " = " << a + c << std::endl;
         std::cout << a << " - " << c << " = " << a - c << std::endl;
         std::cout << a << " * " << c << " = " << a * c << std::endl;
         std::cout << a << " / " << c << " = " << a / c << std::endl << std::endl;
 
         /* <, <=, >, >= operators */
-        if (a < test)
-            std::cout << a << " < " << test << std::endl;
-        if (a <= test)
-            std::cout << a << " <= " << test << std::endl;
-        if (a >= test)
-            std::cout << a << " >= " << test << std::endl;
-        if (a > test)
-            std::cout << a << " > " << test << std::endl << std::endl;
+        if (a < c)
+            std::cout << a << " < " << c << std::endl;
+        if (a <= c)
+            std::cout << a << " <= " << c << std::endl;
+        if (a >= c)
+            std::cout << a << " >= " << c << std::endl;
+        if (a > c)
+            std::cout << a << " > " << c << std::endl << std::endl;
         
         /* min() and max() methods */
         Fixed &d = a;
-        Fixed &e = test;
-        std::cout << "min(" << test << ", " << b << ") = " << Fixed::min(test, b) << std::endl;
-        std::cout << "max(" << test << ", " << b << ") = " << Fixed::max(test, b) << std::endl;
+        Fixed &e = c;
+        std::cout << "min(" << c << ", " << b << ") = " << Fixed::min(c, b) << std::endl;
+        std::cout << "max(" << c << ", " << b << ") = " << Fixed::max(c, b) << std::endl;
         std::cout << "min(" << e << ", " << d << ") = " << Fixed::min(e, d) << std::endl;
         std::cout << "max(" << e << ", " << d << ") = " << Fixed::max(e, d) << std::endl << std::endl;
         return 0;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:44:46 by Helene            #+#    #+#             */
-/*   Updated: 2023/10/12 15:34:10 by Helene           ###   ########.fr       */
+/*   Updated: 2024/02/06 23:46:59 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Ice.hpp"
 
-Ice::Ice(/* args */)
+Ice::Ice()
 :	AMateria("ice")
 {
 	std::cout << "Ice: Default constructor" << std::endl;
@@ -34,7 +34,7 @@ Ice& Ice::operator=(const Ice& other) {
 
 AMateria* Ice::clone() const {
 
-	return (new Ice()); // what else ?
+	return (new Ice());
 }
 
 void Ice::use(ICharacter& target) {

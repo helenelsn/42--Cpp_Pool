@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:20:28 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 22:33:09 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:12:39 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ Dog::Dog()
 {
 	std::cout << "Dog: Default constructor" << std::endl;
     _type = "Dog";
-    _brain = new Brain;
+    // _brain = new Brain;
 }
 
 Dog::Dog(const Dog& other) {
-    _type = other._type;
 	std::cout << "Dog: Copy constructor" << std::endl;
+    _type = other._type;
 }
 
 Dog& Dog::operator=(const Dog& other) {
@@ -32,11 +32,11 @@ Dog& Dog::operator=(const Dog& other) {
 
 void    Dog::makeSound(void) const
 {
-    std::cout << "waf" << std::endl;
+    std::cout << "Wouf" << std::endl;
 }
 
 Dog::~Dog()
 {
     std::cout << "Dog: Destructor" << std::endl;
-    delete _brain;
+    // delete _brain;
 }

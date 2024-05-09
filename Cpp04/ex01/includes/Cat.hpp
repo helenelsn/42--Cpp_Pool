@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:02:17 by hlesny            #+#    #+#             */
-/*   Updated: 2023/10/10 23:50:45 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/02/06 17:05:36 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ class Cat : public Animal
         Cat &operator=(const Cat& other);
         void    makeSound(void) const;
         /* std::string getType(void) const; */
-        void    addIdea(std::string newIdea) { _brain->addIdea(newIdea); }
-        void    printIdeas(void) const { std::cout << "Ideas inside a " << _type << "'s brain : " << std::endl; _brain->printIdeas(); }
+        void    addIdea(std::string newIdea);
+        void    printIdeas(void) const;
         virtual ~Cat();
 		
     private :
