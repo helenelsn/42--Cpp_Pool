@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.hpp                                         :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 16:40:25 by Helene            #+#    #+#             */
-/*   Updated: 2024/01/30 13:46:30 by Helene           ###   ########.fr       */
+/*   Created: 2024/05/08 23:51:07 by Helene            #+#    #+#             */
+/*   Updated: 2024/05/09 13:38:24 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+#ifndef ITER_HPP
+# define ITER_HPP
 
-#ifndef WEAPON_HPP
-# define WEAPON_HPP
-
-#include <string>
 #include <iostream>
+#include <string>
 
-class Weapon
+template<typename T>
+void iter(T *array, size_t length, void (*f)(T&))
 {
-    public :
-        Weapon(std::string type = "default weapon");
-        ~Weapon();
-        const std::string& getType( void ) const;
-        void setType(std::string type);
+    for (size_t i = 0; i < length; i++)
+        f(array[i]);
+}
 
-    private :
-        std::string _type;
-    
-};
+template<typename T>
+void doubleValue(T &value)
+{
+    value = value + value;
+}
+
+template<typename T>
+void print(T const& value)
+{
+    std::cout << value << std::endl;
+}
 
 #endif
