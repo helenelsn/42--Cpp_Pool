@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 20:25:06 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/10 04:14:39 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/10 12:59:03 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ class Span
                 if (typeid(*it) != typeid(valueType))
                     throw InvalidType();
             }
-            if (std::distance(begin, end) > _maxStorage - _size)
-                throw FullArray();
+            if ((size_t)std::distance(begin, end) > _maxStorage - _size)
+                throw ArrayIsFull();
             _vec.insert(_vec.end(), begin, end);
             _size += std::distance(begin, end);
         }
@@ -69,10 +69,10 @@ class Span
                     return "Error : Invalid span : not enough stored values";
                 }
         };
-        class FullArray : public std::exception {
+        class ArrayIsFull : public std::exception {
             public :
                 const char *what() const throw() {
-                    return "Error : max amount of storage has been reached";
+                    return "Error : max amount of storage would be exceeded";
                 }
         };
 };

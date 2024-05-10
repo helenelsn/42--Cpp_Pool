@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 23:36:01 by hlesny            #+#    #+#             */
-/*   Updated: 2024/05/10 04:14:59 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/10 12:58:09 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ std::vector<int> Span::getVec(void) const {
 
 void Span::addNumber(int const& n) {
 	if (_size == _maxStorage)
-		throw FullArray();
+		throw ArrayIsFull();
 	_size++;
 	_vec.push_back(n);
 }
@@ -72,10 +72,10 @@ size_t Span::shortestSpan() const {
 	// std::cout << "} " << std::endl;
 
 	size_t minDist = UINT_MAX;
-	for (size_t i = 0; i < _size; i++)
+	for (std::vector<int>::iterator it = sortedVec.begin(); it != sortedVec.end(); it++)
 	{
-		if (i && (size_t) std::abs(sortedVec[i] - sortedVec[i - 1]) < minDist)
-			minDist = std::abs(sortedVec[i] - sortedVec[i - 1]);
+		if (it !=  sortedVec.begin() && (size_t) std::abs(*it - *(it - 1)) < minDist)
+			minDist = std::abs(*it - *(it - 1));
 		// std::cout << "vec[" << i << "] = " << _vec[i] << ", vec[" << i - 1 << "] = " << _vec[i - 1] << std::endl;
 		
 		// std::cout << "i = " << i << ", min dist = " << minDist << std::endl;
