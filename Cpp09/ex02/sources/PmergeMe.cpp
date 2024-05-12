@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:49:50 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/13 00:22:08 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 00:50:11 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,6 @@ PmergeMe::~PmergeMe() {
     // std::cout << "PmergeMe: Destructor" << std::endl;
 }
 
-// void PmergeMe::printSequence(std::string str) const {
-// 	for (std::list<int>::iterator it = _listSequence.begin(); it != _listSequence.end(); it++)
-// 		std::cout << *it << " ";
-// 	std::cout << std::endl;
-// }
-
 void PmergeMe::sortSequences() {
 
 	double startVecSort, startListSort, endSorts;
@@ -79,43 +73,9 @@ void PmergeMe::sortSequences() {
 	
 }
 
-void recInsertSortVector(std::vector< std::vector<int> > &pairs, int n) {
-	
-	if (n <= 1)
-		return;
-	
-	recInsertSortVector(pairs, n - 1);
-	int last = pairs[n - 1][1]; // [1] car s'interesse au plus grand
-	int lastSmall = pairs[n - 1][0];
-	int j = n - 2;
-	while (j >= 0 && pairs[j][1] > last)
-	{
-		pairs[j + 1][1] = pairs[j][1];
-		pairs[j + 1][0] = pairs[j][0];
-		j--;
-	}
-	pairs[j + 1][1] = last;
-	pairs[j + 1][0] = lastSmall;
-}
-
-void PmergeMe::vectorSort() {
-	
-	int m = _sequence.size() / 2;
-	std::vector< std::vector<int> > pairs(m);
-
-	// ------------- STEP 1
-	// crée un tableau bidimensionnel regroupant les paires de (ai, bi)
-	for (int i = 0, j = 0; i < m; i++, j+=2)
-	{
-		pairs[i].push_back(_sequence[j]);
-		pairs[i].push_back(_sequence[j + 1]);
-		// vérifier que ca trie bien par ordre croissant 
-		std::sort(pairs[i].begin(), pairs[i].end()); 
-	}
-	
-	// ------------- STEP 2 
-	std::vector<int> sorted; // les (ai) triés
-	std::vector<int> pairComplements; // les (bi), aux indices correspondants à ceux de leurs (ai) respectifs
+void vecRecInsertSort(std::vector< std::vector<int> > &pairs, std::vector<int> &sorted,
+	std::vector<int> &pairComplements)
+{
 	bool stopSearch = false;
 	
 	for (size_t i = 0; i < pairs.size(); i++)
@@ -138,37 +98,32 @@ void PmergeMe::vectorSort() {
 			pairComplements.push_back(pairs[i][0]);
 		}
 	}
+}
 
-	// attention au cas ou pairComplement est vide ! ca segfault pr l'instant
-	sorted.insert(sorted.begin(), pairComplements.front()); 
-	pairComplements.erase(pairComplements.begin());
-	
-	// rajoute dans la liste des bi le potentiel élément non apparié de la liste de départ (ie si la taille de la liste était impaire)
-	if (_sequence.size() % 2)
-		pairComplements.push_back(_sequence.back());
-
-	// Determines the insertion order
-	std::vector<int> insertionOrder;
+void vecInsertionOrder(std::vector<int> &insertionOrder, std::vector<int> &boundsIndexes,
+	size_t sequenceSize, size_t currVecSize)
+{
 	size_t tk = 1;
 	size_t prev_tk = 1;
-	int isOdd = (_sequence.size() % 2);
+	int isOdd = (sequenceSize % 2);
 	
-	for (size_t k = 2; tk < sorted.size() + isOdd; k++)
+	for (size_t k = 2; tk < currVecSize + isOdd; k++)
 	{
 			prev_tk = tk;
 			tk = (pow(2, k + 1) + pow(-1, k)) / 3;
-			for (size_t t = (tk < sorted.size() + isOdd) ? tk : sorted.size() -1 + isOdd ; t > prev_tk; t--)
+			for (size_t t = (tk < currVecSize + isOdd) ? tk : currVecSize -1 + isOdd ; t > prev_tk; t--)
 				insertionOrder.push_back(t);	
 	}
-
-	std::vector<int> boundsIndexes;
 	for (size_t i = 0; i < insertionOrder.size(); i++)
 		boundsIndexes.push_back(insertionOrder[i]);
+}
 
-	// ------------- STEP 3
-	
-	// depuis begin() up to xi not included
-	// et on s'interesse, pour un yi, a bj avec j = i - 2
+
+// depuis begin() up to xi not included
+// et on s'interesse, pour un yi, a bj avec j = i - 2
+void vecBinaryInsertion(std::vector<int> &sorted, std::vector<int> &pairComplements,
+	std::vector<int> &insertionOrder, std::vector<int> &boundsIndexes)
+{
 	for (size_t i = 0; i < insertionOrder.size(); i++)
 	{
 		std::vector<int>::iterator insertingBefore = (std::lower_bound(sorted.begin(), sorted.begin() + boundsIndexes[i], pairComplements[insertionOrder[i] - 2]));
@@ -182,6 +137,43 @@ void PmergeMe::vectorSort() {
 				boundsIndexes[i]++;
 		}
 	}
+}
+
+void PmergeMe::vectorSort() {
+	
+	int m = _sequence.size() / 2;
+	std::vector< std::vector<int> > pairs(m);
+
+	// ------------- STEP 1
+	// crée un tableau bidimensionnel regroupant les paires de (ai, bi)
+	for (int i = 0, j = 0; i < m; i++, j+=2)
+	{
+		pairs[i].push_back(_sequence[j]);
+		pairs[i].push_back(_sequence[j + 1]);
+		std::sort(pairs[i].begin(), pairs[i].end()); 
+	}
+	
+	// ------------- STEP 2 
+	std::vector<int> sorted; // les (ai) triés
+	std::vector<int> pairComplements; // les (bi), aux indices correspondants à ceux de leurs (ai) respectifs
+
+	vecRecInsertSort(pairs, sorted, pairComplements);
+
+	// attention au cas ou pairComplement est vide ! ca segfault pr l'instant
+	sorted.insert(sorted.begin(), pairComplements.front()); 
+	pairComplements.erase(pairComplements.begin());
+	
+	// rajoute dans la liste des bi le potentiel élément non apparié de la liste de départ (ie si la taille de la liste était impaire)
+	if (_sequence.size() % 2)
+		pairComplements.push_back(_sequence.back());
+
+	// Determines the insertion order
+	std::vector<int> insertionOrder;
+	std::vector<int> boundsIndexes;
+	vecInsertionOrder(insertionOrder, boundsIndexes, _sequence.size(), sorted.size());
+
+	// ------------- STEP 3
+	vecBinaryInsertion(sorted, pairComplements, insertionOrder, boundsIndexes);
 	_sequence = sorted;
 }
 
