@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 02:42:26 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/12 16:41:35 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/12 16:56:01 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,7 @@ void BitcoinExchange::getCurrencyValues(std::string input) const {
 	
 	std::ifstream inputFile(input);
 	if (!inputFile.is_open())
-	{
-		std::cout << "eh merde, pas l'input file" << std::endl;
-		return ; // throw exception 
-	}
+		throw BitcoinExchange::fileIssue();
 
 	// this->printDataBase();
 
@@ -150,22 +147,22 @@ void BitcoinExchange::getCurrencyValues(std::string input) const {
 	{
 		if (line == "date | value")
 			continue;
-			try {
-				size_t pos = line.find('|');
-				date = line.substr(0, pos - 1);
-				checkDateFormat(date);
-				if (pos == std::string::npos)
-					throw BitcoinExchange::invalidFormat(); 
-				value = line.substr(pos + 2);
-				checkValueFormat(value);
-				
-				std::pair<std::string, float> toConvert(date, std::stof(value.substr()));
-				printCurrencyValue(toConvert);
-				
-			}
-			catch (std::exception &e) {
-				std::cerr << "Error : " << e.what() << std::endl;
-			}
+		try {
+			size_t pos = line.find('|');
+			date = line.substr(0, pos - 1);
+			checkDateFormat(date);
+			if (pos == std::string::npos || line.find('|', pos + 1) != std::string::npos)
+				throw BitcoinExchange::invalidFormat(); 
+			value = line.substr(pos + 2);
+			checkValueFormat(value);
+			
+			std::pair<std::string, float> toConvert(date, std::stof(value.substr()));
+			printCurrencyValue(toConvert);
+			
+		}
+		catch (std::exception &e) {
+			std::cerr << "Error : " << e.what() << std::endl;
+		}
 	}
 	
 }
