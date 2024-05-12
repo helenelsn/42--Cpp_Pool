@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:49:50 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/13 00:50:11 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 01:29:51 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 PmergeMe::PmergeMe(int argc, char **argv)
 {
-	// std::cout << "PmergeMe: Default constructor" << std::endl;
+	std::cout << "PmergeMe: Default constructor" << std::endl;
 	
 	std::cout << "Before : ";
 	for (int i = 1; i <argc; i++)
@@ -45,7 +45,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
 }
 
 PmergeMe::~PmergeMe() {
-    // std::cout << "PmergeMe: Destructor" << std::endl;
+    std::cout << "PmergeMe: Destructor" << std::endl;
 }
 
 void PmergeMe::sortSequences() {
@@ -59,10 +59,10 @@ void PmergeMe::sortSequences() {
 	endSorts = clock();
 
 	std::cout << "After : ";
-	for (size_t i = 0; i < _sequence.size(); i++)
-		std::cout << _sequence[i] << " ";
-	// for (std::list<int>::iterator it = _listSequence.begin(); it != _listSequence.end(); it++)
-	// 	std::cout << *it << " ";
+	// for (size_t i = 0; i < _sequence.size(); i++)
+	// 	std::cout << _sequence[i] << " ";
+	for (std::list<int>::iterator it = _listSequence.begin(); it != _listSequence.end(); it++)
+		std::cout << *it << " ";
 	std::cout << std::endl;	
 
 	std::cout << "Time to process a range of " << _sequence.size() << " elements with std::[vector] : ";
@@ -86,7 +86,6 @@ void vecRecInsertSort(std::vector< std::vector<int> > &pairs, std::vector<int> &
 		{
 			if (pairs[i][1] < *it)
 			{
-				// std::cout << "in recursiveSort loop, "
 				stopSearch = true;
 				sorted.insert(it, pairs[i][1]);
 				pairComplements.insert(pairComplements.begin() + jsp, pairs[i][0]);
@@ -156,13 +155,11 @@ void PmergeMe::vectorSort() {
 	// ------------- STEP 2 
 	std::vector<int> sorted; // les (ai) triés
 	std::vector<int> pairComplements; // les (bi), aux indices correspondants à ceux de leurs (ai) respectifs
-
 	vecRecInsertSort(pairs, sorted, pairComplements);
 
 	// attention au cas ou pairComplement est vide ! ca segfault pr l'instant
 	sorted.insert(sorted.begin(), pairComplements.front()); 
 	pairComplements.erase(pairComplements.begin());
-	
 	// rajoute dans la liste des bi le potentiel élément non apparié de la liste de départ (ie si la taille de la liste était impaire)
 	if (_sequence.size() % 2)
 		pairComplements.push_back(_sequence.back());
@@ -198,23 +195,7 @@ std::list<int>::iterator getSteppedIterator(std::list<int> list, int steps)
 	return (it);
 }
 
-void PmergeMe::listSort() {
-	std::list<int> smallest;
-	std::list<int> largest;
-
-	int x = 0;
-	int y = 0;
-
-	
-	for (std::list<int>::iterator it = _listSequence.begin(); it != _listSequence.end() && getMovedIterator(it, 1) != _listSequence.end(); it++)
-	{
-		x = *it;
-		y = *(++it);
-		x < y ? (smallest.push_back(x), largest.push_back(y)) : (smallest.push_back(y), largest.push_back(x));
-	}
-
-	// ------------- STEP 2 
-
+void listRecInsertSort(std::list<int> &smallest, std::list<int> &largest) {
 	bool stopSearch = false;
 	
 	for (size_t i = 0; i < largest.size(); i++)
@@ -223,8 +204,6 @@ void PmergeMe::listSort() {
 		stopSearch = false;
 		for (std::list<int>::iterator it_sublist = largest.begin(); it_sublist != it && stopSearch == false; it_sublist++)
 		{
-			
-			// std::cout << "*it_sublist = " << *it_sublist << ", *it = " << *it << std::endl;
 			if (*it_sublist > *it)
 			{
 				stopSearch = true;
@@ -246,18 +225,13 @@ void PmergeMe::listSort() {
 			}
 		}
 	}
+}
 
-	largest.push_front(smallest.front());
-	smallest.pop_front();
-
-	if (_listSequence.size() % 2)
-		smallest.push_back(_listSequence.back());
-
-	// Determines the insertion order
-	std::list<int> insertionOrder;
+void listInsertionOrder(std::list<int> &largest,
+std::list<int> &insertionOrder, std::list<int> &boundsIndexes, size_t sequenceSize) {
 	size_t tk = 1;
 	size_t prev_tk = 1;
-	int isOdd = (_sequence.size() % 2);
+	int isOdd = (sequenceSize % 2);
 	
 	for (size_t k = 2; tk < largest.size() + isOdd; k++)
 	{
@@ -268,12 +242,12 @@ void PmergeMe::listSort() {
 				insertionOrder.push_back(t);	
 	}
 
-	// ------------- STEP 3
-	
-	std::list<int> boundsIndexes;
 	for (std::list<int>::iterator it = insertionOrder.begin(); it != insertionOrder.end(); it++)
 		boundsIndexes.push_back(*it);
-	
+}
+
+void listBinaryInsertion(std::list<int> &largest, std::list<int> &smallest,
+std::list<int> &insertionOrder, std::list<int> &boundsIndexes) {
 	for (std::list<int>::iterator it = insertionOrder.begin(), it_bounds = boundsIndexes.begin() ; it != insertionOrder.end(); it++, it_bounds++)
 	{
 		std::list<int>::iterator insertingBefore = std::lower_bound(largest.begin(), getMovedIterator(largest.begin(), *it_bounds), *(getMovedIterator(smallest.begin(), *it - 2)));
@@ -286,5 +260,34 @@ void PmergeMe::listSort() {
 				(*it)++;
 		}
 	}
+}
+
+void PmergeMe::listSort() {
+	std::list<int> smallest;
+	std::list<int> largest;
+
+	int x = 0;
+	int y = 0;
+
+	for (std::list<int>::iterator it = _listSequence.begin(); it != _listSequence.end() && getMovedIterator(it, 1) != _listSequence.end(); it++)
+	{
+		x = *it;
+		y = *(++it);
+		x < y ? (smallest.push_back(x), largest.push_back(y)) : (smallest.push_back(y), largest.push_back(x));
+	}
+
+	// ------------- STEP 2 
+	listRecInsertSort(smallest, largest);
+	largest.push_front(smallest.front());
+	smallest.pop_front();
+	if (_listSequence.size() % 2)
+		smallest.push_back(_listSequence.back());
+
+	std::list<int> insertionOrder;
+	std::list<int> boundsIndexes;
+	listInsertionOrder(largest, insertionOrder, boundsIndexes, _listSequence.size());
+
+	// ------------- STEP 3
+	listBinaryInsertion(largest, smallest, insertionOrder, boundsIndexes);
 	_listSequence = largest;
 }
