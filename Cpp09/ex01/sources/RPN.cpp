@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 01:33:51 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/12 02:41:00 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/12 17:16:01 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void doOp(std::stack<int> &stack, char op)
 	stack.pop();
 	int a = stack.top();
 	stack.pop();
+
 	switch (op) {
 		case '+' :
 		{
