@@ -6,11 +6,11 @@
 #    By: Helene <Helene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:57:58 by Helene            #+#    #+#              #
-#    Updated: 2024/05/11 18:42:40 by Helene           ###   ########.fr        #
+#    Updated: 2024/05/12 17:18:41 by Helene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pmerge_me
+NAME = PmergeMe
 CC = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror # -g3
 RM = rm -f

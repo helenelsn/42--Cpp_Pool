@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:50:20 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/11 21:49:00 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/12 17:52:52 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 #include <iostream>
 #include <vector>
 #include <list>
-#include <algorithm> // ?
+#include <algorithm>
 #include <cmath>
+#include <ctime>
 
 class PmergeMe
 {
@@ -28,14 +29,13 @@ class PmergeMe
     private :
         std::vector<int> _sequence;
         std::list<int> _listSequence;
-        // std::vector<int> ordered;
-        // std::list<int> _orderedListSequence;
 
 	public :
 		PmergeMe(int argc, char **argv);
         PmergeMe(const PmergeMe& other);
         PmergeMe &operator=(const PmergeMe& other);
         ~PmergeMe();
+        void sortSequences();
         void vectorSort();
         void listSort();
         

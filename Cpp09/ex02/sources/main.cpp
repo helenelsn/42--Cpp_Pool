@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:33:55 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/12 01:02:16 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/12 23:33:30 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,8 @@ int main(int argc, char **argv)
         return 0;
     
     // parser pour etre sur qu'il n'y a que des unsigned int passés en argument ?
-    
 
     PmergeMe p(argc, argv);
-    // p.vectorSort();
-    p.listSort();
-
-
-    // std::list<int> test;
-    // test.push_back(10);
-    // test.push_back(5);
-    // for (std::list<int>::iterator it = test.begin(); it != test.end(); it++)
-    //     std::cout << *it << std::endl;
-    
-    // // std::move(test.end(), test.end(), test.begin());
-    // test.splice(test.begin(), test, ++test.begin());
-    // for (std::list<int>::iterator it = test.begin(); it != test.end(); it++)
-    //     std::cout << *it << std::endl;
-    
     
     return 0;
 }
