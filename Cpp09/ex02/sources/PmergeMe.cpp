@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:49:50 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/12 01:14:29 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/12 01:33:39 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ PmergeMe::PmergeMe(int argc, char **argv)
 PmergeMe::PmergeMe(const PmergeMe& other) {
 
 	std::cout << "PmergeMe: Copy constructor" << std::endl;
-
-	(void) other; // a modif, rajouté juste pr que ca compile
+	*this = other;
 }
 
 PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
     
 	std::cout << "PmergeMe: Assignment operator" << std::endl;
 	
-	(void) other; // a modif, rajouté juste pr que ca compile
-
+	// faire des getters plutot
+	_sequence = other._sequence;
+	_listSequence = other._listSequence; 
 	return *this;
 }
 

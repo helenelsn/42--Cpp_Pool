@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 11:18:17 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 19:23:32 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/12 14:44:57 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void ScalarConverter::convert(std::string const& literal) {
 	
 	double toDouble;
 	float toFloat;
-	int toInt;
+	long toInt;
 	char toChar;
 	
 	std::string pseudoTypes[6] = 
@@ -102,7 +102,12 @@ void ScalarConverter::convert(std::string const& literal) {
 	}
 	else // est un int
 	{
-		toInt = std::atoi(literal.c_str());
+		toInt = std::atol(literal.c_str());
+		
+		// a verifier
+		if (toInt < INT_MIN || toInt > __INT_MAX__)
+			std::cout << "int : impossible : would overflow" << std::endl;
+		
 		toFloat = static_cast<float>(toInt);
 		toDouble = static_cast<double>(toInt);
 	}
