@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 23:26:06 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 00:59:38 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 01:50:28 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ class Form
         class GradeTooLowException : public std::exception
         {
             public :
-                virtual const char *what() const throw(); // virtual ?
+                const char *what() const throw();
         };
         class GradeTooHighException : public std::exception
         {
             public :
-                virtual const char *what() const throw(); // virtual ?
+                const char *what() const throw();
         };
 };
 

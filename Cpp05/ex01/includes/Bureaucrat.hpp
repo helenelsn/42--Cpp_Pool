@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 22:27:26 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 00:26:38 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 01:50:03 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ class Bureaucrat
         void incrementGrade();
         void decrementGrade();
         void signForm(Form const& form) const;
-        virtual ~Bureaucrat(); // virtual ?
+        ~Bureaucrat();
         class GradeTooLowException : public std::exception
         {
             public :
-                virtual const char *what() const throw(); // virtual ?
+                const char *what() const throw();
         };
         class GradeTooHighException : public std::exception
         {
             public :
-                virtual const char *what() const throw(); // virtual ?
+                const char *what() const throw();
         };
 };
 
