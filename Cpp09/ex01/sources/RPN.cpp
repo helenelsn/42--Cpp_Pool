@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 01:33:51 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/12 17:16:01 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/14 00:24:21 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ Rpn::~Rpn() {
 void doOp(std::stack<int> &stack, char op)
 {
 	if (stack.size() < 2)
-		throw Rpn::wrongOperatorsOrder();
+		throw Rpn::wrongRpnFormat();
 		
 	int b = stack.top();
 	stack.pop();
@@ -84,6 +84,8 @@ void Rpn::processOperation(void) const {
 		else
 			doOp(stack, _rpn[i]);
 	}
+	if (stack.size() != 1)
+		throw Rpn::wrongRpnFormat();
 
 	std::cout << "result = " << stack.top() << std::endl;
 }

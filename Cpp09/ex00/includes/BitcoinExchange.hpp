@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 19:33:06 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/12 16:14:53 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/14 00:19:48 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@
 
 #define DATABASE        "data.csv"
 #define DATABASE_FORMAT ".csv"
-
-typedef struct 	s_date {
-	int year;
-	int month;
-	int day;
-}				t_date;
 
 class BitcoinExchange
 {   
