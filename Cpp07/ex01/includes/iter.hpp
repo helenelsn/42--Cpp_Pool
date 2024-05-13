@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 23:51:07 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/10 01:09:59 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/05/13 20:46:30 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,16 @@ void print(T const& value)
 {
     std::cout << value << std::endl;
 }
+
+class Awesome
+{
+    public:
+        Awesome( void ) : _n( 42 ) { return; }
+        int get( void ) const { return this->_n; }
+    private:
+        int _n;
+};
+
+std::ostream & operator<<( std::ostream & o, Awesome const & rhs ) { o << rhs.get(); return o; }
 
 #endif

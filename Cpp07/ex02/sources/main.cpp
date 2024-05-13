@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:39:58 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/10 01:21:04 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/05/13 20:49:47 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int main()
 {
+    Array<int> emptyTab;
     Array<int> tab(6);
     Array<int>  test(tab);
         
+    std::cout << "empty tab : " << emptyTab << std::endl; 
     std::cout << tab << std::endl; 
     tab[3] = 134;
     std::cout << tab << std::endl;
