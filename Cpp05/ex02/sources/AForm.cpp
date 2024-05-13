@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 23:26:03 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 02:00:25 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:27:08 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ std::string const AForm::getTarget() const {
 }
 
 void AForm::beSigned(Bureaucrat const& b) {
-	if (b.getGrade() <= _gradeToSign)
-		_isSigned = true;
-	b.signForm(*this);
+	if (b.getGrade() > _gradeToSign)
+		throw AForm::GradeTooLowException();
+	_isSigned = true;
 }
 
 void AForm::checkRequirements(Bureaucrat const& b) const {
@@ -86,7 +86,7 @@ const char *AForm::FormIsntSignedException::what() const throw() {
 }
 
 std::ostream &operator<<(std::ostream &flux, AForm const& form) {
-	flux << "Form " << form.getName() << (form.isItSigned() ? " is signed" : "is not signed") << std::endl ;
+	flux << "Form " << form.getName() << (form.isItSigned() ? " is signed" : " is not signed") << std::endl ;
 	flux << "Grade required to sign it : " << form.whichGradeToSign() << std::endl ;
 	flux << "Grade required to execute it : " << form.whichGradeToExec() ;
 	return flux;

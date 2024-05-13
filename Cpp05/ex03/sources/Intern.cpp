@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 02:22:28 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 03:27:18 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:49:09 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ AForm *Intern::newSCF(std::string const& target) const {
 }
 
 AForm *Intern::makeForm(std::string const& name, std::string const& target) const {
-	AForm * (Intern::*forms_ptrs[3])(std::string const&) = {&Intern::newSCF, &Intern::newRRF, &Intern::newPPF};
+	AForm * (Intern::*forms_ptrs[3])(std::string const&) const = {&Intern::newSCF, &Intern::newRRF, &Intern::newPPF};
 	
 	std::string forms[3] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
-	int form_id = -1 + 1 * (target == forms[0]) + 2 * (target == forms[1]) + 3 * (target == forms[2]);
+	int form_id = -1 + 1 * (name == forms[0]) + 2 * (name == forms[1]) + 3 * (name == forms[2]);
 	if (form_id < 0)
 		throw FormDoesNotExist();
 	else

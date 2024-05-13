@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 02:21:56 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 03:12:17 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:52:29 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,14 @@ class Intern
         /* Data */
     
     private :
-        /* Data */
+        AForm *newPPF(std::string const& target) const;
+        AForm *newRRF(std::string const& target) const;
+        AForm *newSCF(std::string const& target) const;
 
 	public :
 		Intern();
         Intern(const Intern& other);
         Intern &operator=(const Intern& other);
-        AForm *newPPF(std::string const& target) const;
-        AForm *newRRF(std::string const& target) const;
-        AForm *newSCF(std::string const& target) const;
         AForm *makeForm(std::string const& name, std::string const& target) const;
         virtual ~Intern();
         class FormDoesNotExist : public std::exception {

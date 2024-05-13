@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 23:26:03 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 00:37:26 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:27:19 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ Form::Form(std::string const& name, int gradeToSign, int gradeToExec)
 {
 	std::cout << "Form: Default constructor" << std::endl;
 	if (gradeToSign > 150 || gradeToExec > 150)
-		throw Form::GradeTooLowException(); // pourquoi est-ce que le 'Form::' n'est pas nécessaire ?
+		throw Form::GradeTooLowException();
 	if (gradeToSign < 1 || gradeToExec < 1)
-		throw Form::GradeTooHighException(); // idem (?)
+		throw Form::GradeTooHighException();
 }
 
 Form::Form(const Form& other) 
@@ -32,7 +32,7 @@ Form::Form(const Form& other)
 Form& Form::operator=(const Form& other) {
     
 	std::cout << "Form: Assignment operator" << std::endl;
-	_isSigned = other.isItSigned();
+	(void) other;
 	return *this;
 }
 
@@ -57,9 +57,11 @@ int Form::whichGradeToExec() const {
 }
 
 void Form::beSigned(Bureaucrat const& b) {
-	if (b.getGrade() <= _gradeToSign)
-		_isSigned = true;
-	b.signForm(*this);
+	
+	if (b.getGrade() > _gradeToSign)
+		throw Form::GradeTooLowException();
+	_isSigned = true;
+	// b.signForm(*this);
 }
 
 const char *Form::GradeTooLowException::what() const throw() {
@@ -71,7 +73,7 @@ const char *Form::GradeTooHighException::what() const throw() {
 }
 
 std::ostream &operator<<(std::ostream &flux, Form const& form) {
-	flux << "Form " << form.getName() << (form.isItSigned() ? " is signed" : "is not signed") << std::endl ;
+	flux << "Form " << form.getName() << (form.isItSigned() ? " is signed" : " is not signed") << std::endl ;
 	flux << "Grade required to sign it : " << form.whichGradeToSign() << std::endl ;
 	flux << "Grade required to execute it : " << form.whichGradeToExec() ;
 	return flux;

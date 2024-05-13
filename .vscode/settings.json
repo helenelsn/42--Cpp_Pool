@@ -82,6 +82,8 @@
         "stack": "cpp",
         "variant": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "list": "cpp",
+        "map": "cpp"
     }
 }
