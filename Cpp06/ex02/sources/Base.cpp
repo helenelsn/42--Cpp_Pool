@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:00:27 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 19:35:37 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 19:32:29 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ Base::~Base() {
 }
 
 Base * generate(void) {
-	srand(time(0));
+	// srand(time(0));
 	int n = rand() % 3;
-	if (!n)
+	if (n == 0)
 	{
 		std::cout << "generating a new C" << std::endl;
 		return new C;
@@ -51,16 +51,19 @@ void identify(Base& p) {
 	try {
 		(void) dynamic_cast<A&>(p);
 		std::cout << "A" << std::endl;
+		return ;
 	}
 	catch (std::exception const& e) {}
 	try {
 		(void) dynamic_cast<B&>(p);
 		std::cout << "B" << std::endl;
+		return ;
 	}
 	catch (std::exception const& e) {}
 	try {
 		(void) dynamic_cast<C&>(p);
 		std::cout << "C" << std::endl;
+		return ;
 	}
 	catch (std::exception const& e) {}
 	std::cout << "Unknown type" << std::endl;

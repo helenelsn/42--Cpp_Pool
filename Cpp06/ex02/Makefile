@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Helene <Helene@student.42.fr>              +#+  +:+       +#+         #
+#    By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:57:58 by Helene            #+#    #+#              #
-#    Updated: 2024/05/08 19:28:32 by Helene           ###   ########.fr        #
+#    Updated: 2024/05/13 19:17:43 by hlesny           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJS_DIR = ./objects/
 INCS_DIR = ./includes/
 
 SRCS = 	main.cpp \
-		\
+		Base.cpp \
 		\
 		
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.cpp=.o))

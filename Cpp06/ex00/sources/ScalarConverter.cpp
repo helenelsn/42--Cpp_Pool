@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 11:18:17 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/12 14:44:57 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 19:10:31 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ ScalarConverter::~ScalarConverter() {
 }
 
 
+void checkRanges(long long input, bool &validInt, bool &validFloat, bool &validDouble) 
+{
+	if (input > INT_MAX || input < INT_MIN)
+		validInt = false;
+	if (input > FLT_MAX || input < FLT_MIN)
+		validFloat = false;
+	if (input > DBL_MAX || input < DBL_MIN)
+		validDouble = false;
+}
 
 /*
 - detect the type of the literal passed as parameter
@@ -55,6 +64,7 @@ void ScalarConverter::convert(std::string const& literal) {
 	float toFloat;
 	long toInt;
 	char toChar;
+	bool validInt = true, validFloat = true, validDouble = true;
 	
 	std::string pseudoTypes[6] = 
 	{
@@ -88,14 +98,16 @@ void ScalarConverter::convert(std::string const& literal) {
 	
 	// comment gerer INT_MAX, INT_MIN, FLT_MAX, FLT_MIN, DBL_MAX, DBL_MIN ?
 
-	if (literal.find('.')) // est un double ou un float
+	if (literal.find('.') != std::string::npos) // est un double ou un float
 	{
+		std::cout << "double" << std::endl;
 		toDouble = std::atof(literal.c_str());
 		toFloat = static_cast<float>(toDouble);
 		toInt = static_cast<int>(toDouble);
 	}
 	else if (literal[literal.length() - 1] == 'f')// est un float
 	{
+		std::cout << "float" << std::endl;
 		toFloat = std::atof(literal.c_str());
 		toDouble = static_cast<double>(toFloat);
 		toInt = static_cast<int>(toFloat);
@@ -104,9 +116,9 @@ void ScalarConverter::convert(std::string const& literal) {
 	{
 		toInt = std::atol(literal.c_str());
 		
-		// a verifier
+		std :: cout << "int (input) = " << literal.c_str() << std::endl;
 		if (toInt < INT_MIN || toInt > __INT_MAX__)
-			std::cout << "int : impossible : would overflow" << std::endl;
+			validInt = false;
 		
 		toFloat = static_cast<float>(toInt);
 		toDouble = static_cast<double>(toInt);
@@ -120,13 +132,23 @@ void ScalarConverter::convert(std::string const& literal) {
 	
 	
 	// print the three remaining values
-	std::cout << "int : " << toInt << std::endl;
-	std::cout << "float : " << toFloat;
-	if (!(toFloat - static_cast<float>(toInt)))
-		std::cout << ".0";
-	std::cout << "f" << std::endl;
-	std::cout << "double : " << toDouble;
-	if (!toDouble - static_cast<double>(toInt))
-		std::cout << ".0" ;
-	std::cout << std::endl;
+	if (validInt)
+		std::cout << "int : " << toInt << std::endl;
+	else
+		std::cout << "int : impossible : would overflow" << std::endl;
+	if (validFloat) 
+	{
+		std::cout << "float : " << toFloat;
+		if (!(toFloat - static_cast<float>(toInt)))
+			std::cout << ".0";
+		std::cout << "f" << std::endl;
+	}
+	if (validDouble) 
+	{
+		std::cout << "double : " << toDouble;
+		if (!toDouble - static_cast<double>(toInt))
+			std::cout << ".0" ;
+		std::cout << std::endl;
+	}
+	
 }
