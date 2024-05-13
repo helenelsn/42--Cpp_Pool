@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 20:01:35 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/09 20:12:17 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 23:40:01 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 int main()
 {
-    // std::vector<int> vector {2, 4, 8, 2};
     std::vector<int> vector;
     int n = 5;
     
@@ -33,20 +32,6 @@ int main()
         catch (std::exception &e) {
             std::cerr << e.what() << std::endl; }
     }
-        
-    // try {
-    //     easyfind(vector, 2);
-    //     std::cout << ""
-    // }
-    // catch (std::exception &e) {
-    //     std::cerr << e.what() << std::endl; }
-    
-    
-    // try {
-    //     easyfind(vector, 3);
-    // }
-    // catch (std::exception &e) {
-    //     std::cerr << e.what() << std::endl; }
 
     return 0;
 }

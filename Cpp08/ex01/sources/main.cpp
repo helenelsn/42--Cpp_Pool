@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 03:12:49 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/10 13:00:53 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/14 00:01:06 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main()
     std::cout << "shortest span : " << sp.shortestSpan() << std::endl;
     std::cout << "longest span : " << sp.longestSpan() << std::endl;
 
-    Span other = (15000);
+    Span other = Span(15000);
     std::vector<int> v1;
     int t1[10000];
     for (int i = 0; i < 10000; i++)

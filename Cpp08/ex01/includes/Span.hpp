@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 20:25:06 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/10 12:59:03 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/13 23:43:16 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Span
         /* Data */
     
     private :
-        unsigned int _maxStorage; // loose the const here ?
+        unsigned int _maxStorage;
         size_t _size;
         std::vector<int> _vec;
 

@@ -6,7 +6,7 @@
 /*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:42:22 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/10 19:26:51 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/14 00:09:24 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int main()
     mstack.push(3);
     mstack.push(5);
     mstack.push(737);
-    //[...]
     mstack.push(0);
     MutantStack<int>::iterator it = mstack.begin();
     MutantStack<int>::iterator ite = mstack.end();
@@ -32,8 +31,8 @@ int main()
     --it;
     while (it != ite)
     {
-    std::cout << *it << std::endl;
-    ++it;
+        std::cout << *it << std::endl;
+        ++it;
     }
     std::stack<int> s(mstack);
 
@@ -50,7 +49,6 @@ int main()
     li.push_back(3);
     li.push_back(5);
     li.push_back(737);
-    //[...]
     li.push_back(0);
     std::list<int>::iterator it_list = li.begin();
     std::list<int>::iterator ite_list = li.end();
@@ -58,8 +56,8 @@ int main()
     --it_list;
     while (it_list != ite_list)
     {
-    std::cout << *it_list << std::endl;
-    ++it_list;
+        std::cout << *it_list << std::endl;
+        ++it_list;
     }
     
         
