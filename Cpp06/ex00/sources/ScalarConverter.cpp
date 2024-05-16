@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 11:18:17 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/13 19:10:31 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/05/16 02:02:28 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,141 @@ ScalarConverter::~ScalarConverter() {
 }
 
 
-void checkRanges(long long input, bool &validInt, bool &validFloat, bool &validDouble) 
+
+void checkRanges(std::string const & input, t_valid &valid) 
 {
-	if (input > INT_MAX || input < INT_MIN)
-		validInt = false;
-	if (input > FLT_MAX || input < FLT_MIN)
-		validFloat = false;
-	if (input > DBL_MAX || input < DBL_MIN)
-		validDouble = false;
+	double n = std::strtod(input.c_str(), 0);
+	if (n < - std::numeric_limits<double>::max() || n > std::numeric_limits<double>::max())
+		valid.validDouble = false;
+	if (n < - std::numeric_limits<float>::max() || n > std::numeric_limits<float>::max())
+		valid.validFloat = false;
+	if (n < std::numeric_limits<int>::min() || n > std::numeric_limits<int>::max())
+		valid.validInt = false;
+}
+
+bool checkChar(std::string const& input, t_types &types) 
+{
+	if (input.length() == 1 && !std::isdigit(input[0]))
+	{
+		types.toChar = input[0];
+		types.toInt = static_cast<int>(input[0]);
+		types.toFloat = static_cast<float>(input[0]);
+		types.toDouble = static_cast<double>(input[0]);
+		return true ;
+	}
+	return false;
+}
+
+bool checkInt(std::string const& input, t_types &types, t_valid &valid) 
+{
+	size_t i = 0;
+	for (; i < input.size(); i++)
+	{
+		if (i == 0 && input[i] == '-')
+			continue ;
+		if (!isdigit(input[i]))
+			return false ;
+	}
+			
+	checkRanges(input, valid);
+	types.toInt = static_cast<int>(std::atoi(input.c_str()));
+	types.toFloat = static_cast<float>(std::atof(input.c_str()));
+	types.toDouble = static_cast<double>(std::strtod(input.c_str(), 0));
+
+	return true ;
+}
+
+bool checkFloat(std::string const& input, t_types &types, t_valid &valid)
+{
+	if (input.find('f') == input.length() - 1)
+	{		
+		checkRanges(input, valid);
+		types.toFloat = std::atof(input.c_str());
+		types.toDouble = static_cast<double>(types.toFloat);
+		types.toInt = static_cast<int>(types.toFloat);
+		return true ;
+	}
+	return false ;
+}
+
+bool checkDouble(std::string const& input, t_types &types, t_valid &valid)
+{
+	if (input.find('.') != std::string::npos) // est un double ou un float
+	{		
+		checkRanges(input, valid);
+		types.toDouble = std::strtod(input.c_str(), 0);
+		types.toFloat = static_cast<float>(types.toDouble);
+		types.toInt = static_cast<int>(types.toDouble);
+		return true ;
+	}
+	return false ;
+}
+
+bool isPseudoType(std::string const& input)
+{
+	std::string pseudoTypes[6] = 
+	{
+		"-inff", "+inff", "nanf",
+		"-inf", "+inf", "nan"
+	};
+
+	int i = 0;
+	for (; input != pseudoTypes[i] && i < 6; i++) {} ;
+	if (i < 6)
+	{
+		std::cout << "char : impossible" << std::endl << "int : impossible" << std::endl;
+		std::cout << "float : " << pseudoTypes[i % 3] << std::endl;
+		std::cout << "double : " << pseudoTypes[(i % 3) + 3] << std::endl;
+		return true ;
+	}
+	return false;
+}
+
+void printConvertedValues(t_types &types, t_valid &valid)
+{
+	types.toChar = static_cast<char>(types.toInt);
+	if (types.toInt < 0 || types.toInt > 127 || !std::isprint(types.toChar)) // a checker
+		std::cout << "char : Non displayable" << std::endl;
+	else
+		std::cout << "char : '" << types.toChar << "'" << std::endl;
+	
+	
+	if (valid.validInt)
+		std::cout << "int : " << types.toInt << std::endl;
+	else
+		std::cout << "int : impossible : would overflow" << std::endl;
+	if (valid.validFloat) 
+	{
+		std::cout << "float : " << types.toFloat;
+		if (!(types.toFloat - static_cast<float>(types.toInt)))
+			std::cout << ".0";
+		std::cout << "f" << std::endl;
+	}
+	else
+		std::cout << "float : impossible : would overflow" << std::endl;
+	if (valid.validDouble) 
+	{
+		std::cout << "double : " << types.toDouble;
+		if (!types.toDouble - static_cast<long long>(types.toDouble))
+			std::cout << ".0" ;
+		std::cout << std::endl;
+	}
+	else
+		std::cout << "double : impossible : would overflow" << std::endl;
+}
+
+bool checkType(std::string const &input, t_types &types, t_valid &valid)
+{
+	if (!input.size())
+		throw ScalarConverter::invalidType();
+	if (isPseudoType(input))
+		return false ;
+	if (!checkChar(input, types)
+		&& !checkDouble(input, types, valid)
+		&& !checkFloat(input, types, valid)
+		&& !checkInt(input, types, valid))
+		throw ScalarConverter::invalidType();
+	return true ;
 }
 
 /*
@@ -58,97 +185,26 @@ void checkRanges(long long input, bool &validInt, bool &validFloat, bool &validD
 - convert it explicitly to the three other data types
 - display the results 
 */
-void ScalarConverter::convert(std::string const& literal) {
+void ScalarConverter::convert(std::string const& literal)
+{
+	t_types types;
+	t_valid valid;
+	memset(&types, 0, sizeof(t_types));
 	
-	double toDouble;
-	float toFloat;
-	long toInt;
-	char toChar;
-	bool validInt = true, validFloat = true, validDouble = true;
-	
-	std::string pseudoTypes[6] = 
-	{
-		"-inff", "+inff", "nanf",
-		"-inf", "+inf", "nan"
-	};
-	
-	// check input length 
-	if (literal.length() == 1 && !std::isdigit(literal[0]) && std::isprint(literal[0]))
-	{
-		// is a printable char
-		// convert and print converted values, then return
-		std::cout << "char : " << literal[0] << std::endl;
-		std::cout << "int : " << static_cast<int>(literal[0]) << std::endl;
-		std::cout << "float : " << static_cast<float>(literal[0]) << ".0f" << std::endl;
-		std::cout << "double : " << static_cast<double>(literal[0]) << ".0" << std::endl;
+	memset(&valid, true, sizeof(t_valid)); // true : marche ?
+	// valid.validChar = true;
+	// valid.validDouble = true;
+	// valid.validFloat = true;
+	// valid.validInt = true;
+		
+
+	try {
+		if (!checkType(literal, types, valid))
+			return ;
+		printConvertedValues(types, valid);
+	}
+	catch (ScalarConverter::invalidType &e) {
+		std::cerr << e.what() << std::endl;
 		return ;
 	}
-
-
-	int i = 0;
-	for (; literal != pseudoTypes[i] && i < 6; i++) {} ;
-	if (i < 6)
-	{
-		// pseudoType case
-		std::cout << "char : impossible" << std::endl << "int : impossible" << std::endl;
-		std::cout << "float : " << pseudoTypes[i % 3] << std::endl;
-		std::cout << "double : " << pseudoTypes[(i % 3) + 3] << std::endl;
-		return ;
-	}
-	
-	// comment gerer INT_MAX, INT_MIN, FLT_MAX, FLT_MIN, DBL_MAX, DBL_MIN ?
-
-	if (literal.find('.') != std::string::npos) // est un double ou un float
-	{
-		std::cout << "double" << std::endl;
-		toDouble = std::atof(literal.c_str());
-		toFloat = static_cast<float>(toDouble);
-		toInt = static_cast<int>(toDouble);
-	}
-	else if (literal[literal.length() - 1] == 'f')// est un float
-	{
-		std::cout << "float" << std::endl;
-		toFloat = std::atof(literal.c_str());
-		toDouble = static_cast<double>(toFloat);
-		toInt = static_cast<int>(toFloat);
-	}
-	else // est un int
-	{
-		toInt = std::atol(literal.c_str());
-		
-		std :: cout << "int (input) = " << literal.c_str() << std::endl;
-		if (toInt < INT_MIN || toInt > __INT_MAX__)
-			validInt = false;
-		
-		toFloat = static_cast<float>(toInt);
-		toDouble = static_cast<double>(toInt);
-	}
-
-	toChar = static_cast<char>(toInt);
-	if (!std::isprint(toChar))
-		std::cout << "char : Non displayable" << std::endl;
-	else
-		std::cout << "char : '" << toChar << "'" << std::endl;
-	
-	
-	// print the three remaining values
-	if (validInt)
-		std::cout << "int : " << toInt << std::endl;
-	else
-		std::cout << "int : impossible : would overflow" << std::endl;
-	if (validFloat) 
-	{
-		std::cout << "float : " << toFloat;
-		if (!(toFloat - static_cast<float>(toInt)))
-			std::cout << ".0";
-		std::cout << "f" << std::endl;
-	}
-	if (validDouble) 
-	{
-		std::cout << "double : " << toDouble;
-		if (!toDouble - static_cast<double>(toInt))
-			std::cout << ".0" ;
-		std::cout << std::endl;
-	}
-	
 }
