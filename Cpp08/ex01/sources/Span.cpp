@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 23:36:01 by hlesny            #+#    #+#             */
-/*   Updated: 2024/05/10 12:58:09 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/29 15:48:29 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,18 @@ void Span::checkStorage(void) const {
 
 size_t Span::shortestSpan() const {
 	checkStorage();
-	std::vector<int> sortedVec = _vec;
-	std::sort(sortedVec.begin(), sortedVec.end());
+	std::vector<int> vec = _vec;
+	std::sort(vec.begin(), vec.end());
 	
 	// std::cout << "{ " ;
 	// for (size_t i = 0; i < _vec.size(); i++)
-	// 	std::cout << sortedVec[i] << ", " ;
+	// 	std::cout << vec[i] << ", " ;
 	// std::cout << "} " << std::endl;
 
 	size_t minDist = UINT_MAX;
-	for (std::vector<int>::iterator it = sortedVec.begin(); it != sortedVec.end(); it++)
+	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
 	{
-		if (it !=  sortedVec.begin() && (size_t) std::abs(*it - *(it - 1)) < minDist)
+		if (it !=  vec.begin() && (size_t) std::abs(*it - *(it - 1)) < minDist)
 			minDist = std::abs(*it - *(it - 1));
 		// std::cout << "vec[" << i << "] = " << _vec[i] << ", vec[" << i - 1 << "] = " << _vec[i - 1] << std::endl;
 		
@@ -88,5 +88,6 @@ size_t Span::longestSpan() const {
 	checkStorage();
 	int max = *std::max_element(_vec.begin(), _vec.end());
 	int min = *std::min_element(_vec.begin(), _vec.end());
-	return abs(max - min);
+	std::cout << "max = " << max << ", min = " << min << std::endl;
+	return std::abs(max - min);
 }
