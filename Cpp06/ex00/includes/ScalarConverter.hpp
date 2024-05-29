@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 11:17:43 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/16 01:33:42 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/29 14:37:48 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <limits>
 #include <cctype>
 #include <cstdlib>
+#include <cstring>
 
 typedef struct  s_types {
     double  toDouble;
@@ -37,10 +38,12 @@ typedef struct  s_valid {
 
 class ScalarConverter
 {
-	public :
+    private :
 		ScalarConverter();
         ScalarConverter(const ScalarConverter& other);
         ScalarConverter &operator=(const ScalarConverter& other);
+        
+	public :
         ~ScalarConverter();
         static void convert(std::string const& literal);
         class invalidType : public std::exception {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:55:00 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 19:39:16 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/29 14:44:43 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 class Base
 {
     public :
-        virtual ~Base();
+        virtual ~Base() {}
 };
 
 Base * generate(void);

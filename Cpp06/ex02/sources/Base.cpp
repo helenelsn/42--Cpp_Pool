@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:00:27 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/13 19:32:29 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/05/29 14:44:48 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "../includes/B.hpp"
 #include "../includes/C.hpp"
 
-Base::~Base() {
+/* Base::~Base() {
     std::cout << "Base: Destructor" << std::endl;
-}
+} */
 
 Base * generate(void) {
 	// srand(time(0));

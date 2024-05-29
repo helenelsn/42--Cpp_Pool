@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:40:48 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/08 16:11:47 by Helene           ###   ########.fr       */
+/*   Updated: 2024/05/29 14:40:13 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ class Serializer
         /* Data */
     
     private :
-        /* Data */
-
-	public :
-		Serializer();
+        Serializer();
         Serializer(const Serializer& other);
         Serializer &operator=(const Serializer& other);
-        virtual ~Serializer();
+
+	public :
+        ~Serializer();
         static uintptr_t serialize(Data* ptr);
         static Data* deserialize(uintptr_t raw);
 };
