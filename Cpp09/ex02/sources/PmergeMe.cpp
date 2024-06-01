@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:49:50 by Helene            #+#    #+#             */
-/*   Updated: 2024/06/01 13:20:54 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/06/01 20:36:23 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,14 @@ void PmergeMe::sortSequences() {
 	endSorts = clock();
 
 	std::cout << "After : ";
-	printVector(_sequence);
+	// printVector(_sequence);
 	// printList(_listSequence);
+	std::cout << "WESH ????" << std::endl;
 	
 	// for (size_t i = 0; i < _sequence.size(); i++)
 		// std::cout << _sequence[i] << " ";
-	// for (std::list<int>::iterator it = _listSequence.begin(); it != _listSequence.end(); it++)
-		// std::cout << *it << " ";
+	for (std::list<int>::iterator it = _listSequence.begin(); it != _listSequence.end(); it++)
+		std::cout << *it << " ";
 	std::cout << std::endl;	
 
 	std::cout << "Time to process a range of " << _sequence.size() << " elements with std::[vector] : ";
@@ -338,32 +339,58 @@ void listRecInsertSort(std::list<int> &smallest, std::list<int> &largest, int si
 	int last = getValueAtIndex(largest, size - 1);
 	int lastComplement = getValueAtIndex(smallest, size - 1);
 
-	std::list<int>::iterator it = getItAtIndex(largest, size - 2);
-	std::list<int>::iterator itComplement = getItAtIndex(smallest, size - 2);
-	std::cout << " *it = " << *it << ", *itComplement = " << *itComplement << std::endl;
+	// std::list<int>::iterator itComplement = getItAtIndex(smallest, size - 2);
+	// std::list<int>::iterator it = getItAtIndex(largest, size - 2);
+	// std::cout << " *it = " << *it << ", *itComplement = " << *itComplement << std::endl;
 	
+	std::list<int>::iterator it = largest.begin();
+	std::advance(it, size - 2);
+	std::list<int>::iterator itComp = smallest.begin();
+	std::advance(itComp, size - 2);
 
-	std::list<int>::iterator itttt = largest.begin();
-	for (; it != largest.begin() && *it > last; it--, itComplement--)
+	while (it != largest.begin())
 	{
-		*(getItAtSteps(it, 1)) = *it;
-		*(getItAtSteps(itComplement, 1)) = *itComplement;
+		if (*it > last && *(--it) <= last)
+		{
+			largest.insert(it, last);
+			smallest.insert(itComp, lastComplement);
+			return ;
+		}
+		else
+		{
+			it--;
+			itComp--;
+		}
 	}
-	if (it == largest.begin() && *it > last)
-	{
-		*(getItAtSteps(it, 1)) = *it;
-		*(getItAtSteps(itComplement, 1)) = *itComplement;
+	largest.push_front(last);
+	smallest.push_front(lastComplement);
 
-		it--; 
-		itComplement--;
-		*it = last;
-		*itComplement = lastComplement;
-	}
-	else
-	{
-		*(getItAtSteps(it, 1)) = last;
-		*(getItAtSteps(itComplement, 1)) = lastComplement;
-	}
+	largest.erase(getItAtIndex(largest, size - 1));
+	smallest.erase(getItAtIndex(smallest, size - 1));
+	
+	// for (; it != largest.begin() && *it > last; it--, itComp--)
+	// {
+	// 	*(getItAtSteps(it, 1)) = *it;
+	// 	*(getItAtSteps(itComp, 1)) = *itComp;
+	// }
+	// if (it == largest.begin() && *it > last)
+	// {
+	// 	*(getItAtSteps(it, 1)) = *it;
+	// 	*(getItAtSteps(itComp, 1)) = *itComp;
+
+	// 	// it--; 
+	// 	// itComp--;
+	// 	// *it = last;
+	// 	// *itComp = lastComplement;
+
+	// 	*(getItAtSteps(it, -1)) = last;
+	// 	*(getItAtSteps(itComp, -1)) = lastComplement;
+	// }
+	// else
+	// {
+	// 	*(getItAtSteps(it, 1)) = last;
+	// 	*(getItAtSteps(itComp, 1)) = lastComplement;
+	// }
 	
 	
 }
