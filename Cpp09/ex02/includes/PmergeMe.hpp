@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:50:20 by Helene            #+#    #+#             */
-/*   Updated: 2024/05/12 17:52:52 by Helene           ###   ########.fr       */
+/*   Updated: 2024/06/02 14:59:26 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <deque>
 #include <algorithm>
 #include <cmath>
 #include <ctime>
@@ -29,6 +30,7 @@ class PmergeMe
     private :
         std::vector<int> _sequence;
         std::list<int> _listSequence;
+        std::deque<int> _dequeSequence;
 
 	public :
 		PmergeMe(int argc, char **argv);
@@ -38,6 +40,7 @@ class PmergeMe
         void sortSequences();
         void vectorSort();
         void listSort();
+        void dequeSort();
         
 };
 
