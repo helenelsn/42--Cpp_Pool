@@ -3,16 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:49:50 by Helene            #+#    #+#             */
-/*   Updated: 2024/06/01 20:36:23 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/06/02 00:24:01 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/PmergeMe.hpp"
 
-void printList(std::list<int>::iterator list);
+std::list<int>::iterator getItAtIndex(std::list<int> list, int index)
+{
+	// if (index >= list.size())
+	// 	; // ?
+	std::list<int>::iterator it = list.begin();
+	std::advance(it, index);
+	return it;
+}
+
+std::list<int>::iterator getItAtSteps(std::list<int>::iterator listIt, int step)
+{
+	std::list<int>::iterator it = listIt;
+	std::advance(it, step);	// a securiser ?
+	return it;
+}
+
+int distInList(std::list<int>::iterator begin, std::list<int>::iterator end)
+{
+	int d = 0;
+	for (std::list<int>::iterator it = begin; it != end; it++)
+		d++;
+	return d;
+}
+
+void printList(std::list<int> list)
+{
+	for (std::list<int>::iterator it = list.begin(); it != list.end(); it++)
+	{
+		std::list<int>::iterator tmp = it;
+		std::advance(tmp, 1);
+		if (tmp != list.end() && *it > *tmp)
+		{
+			int index = distInList(list.begin(), it);
+			std::cout << std::endl << "--------------------- Error at index " << index << ", element "<< *it << " is before " << *tmp << "------------------------ " << std::endl;
+			return ; 
+		}
+		std::cout << *it << " ";
+	}
+}
 
 void printVector(std::vector<int> vec)
 {
@@ -20,7 +58,7 @@ void printVector(std::vector<int> vec)
 	{
 		if (i + 1 < vec.size() && vec[i] > vec[i + 1])
 		{
-			std::cout << std::endl << "--------------------- Error at index " << i << ", element "<< vec[i] << "------------------------ " << std::endl;
+			std::cout << std::endl << "--------------------- Error at index " << i << ", element "<< vec[i] << " is before " << vec[i + 1] << "------------------------ " << std::endl;
 			return ; 
 		}
 		std::cout << vec[i] << " ";
@@ -74,15 +112,15 @@ void PmergeMe::sortSequences() {
 	listSort();
 	endSorts = clock();
 
-	std::cout << "After : ";
-	// printVector(_sequence);
-	// printList(_listSequence);
-	std::cout << "WESH ????" << std::endl;
+	std::cout << "After : " << std::endl;
+	printVector(_sequence);
+	printList(_listSequence);
 	
 	// for (size_t i = 0; i < _sequence.size(); i++)
 		// std::cout << _sequence[i] << " ";
-	for (std::list<int>::iterator it = _listSequence.begin(); it != _listSequence.end(); it++)
-		std::cout << *it << " ";
+	// std::cout << std::endl << std::endl;
+	// for (std::list<int>::iterator it = _listSequence.begin(); it != _listSequence.end(); it++)
+		// std::cout << *it << " ";
 	std::cout << std::endl;	
 
 	std::cout << "Time to process a range of " << _sequence.size() << " elements with std::[vector] : ";
@@ -92,32 +130,6 @@ void PmergeMe::sortSequences() {
 	std::cout << (endSorts - startListSort)/CLOCKS_PER_SEC * pow(10, 6) << " us" << std::endl;
 	
 }
-
-// void vecRecInsertSort(std::vector< std::vector<int> > &pairs, std::vector<int> &sorted,
-// 	std::vector<int> &pairComplements)
-// {
-// 	bool stopSearch = false;
-	
-// 	for (size_t i = 0; i < pairs.size(); i++)
-// 	{
-// 		stopSearch = false;
-// 		int jsp = 0;
-// 		for (std::vector<int>::iterator it = sorted.begin(); it != sorted.end() && stopSearch == false; it++, jsp++)
-// 		{
-// 			if (pairs[i][1] < *it)
-// 			{
-// 				stopSearch = true;
-// 				sorted.insert(it, pairs[i][1]);
-// 				pairComplements.insert(pairComplements.begin() + jsp, pairs[i][0]);
-// 			}
-// 		}	
-// 		if (!stopSearch)
-// 		{
-// 			sorted.push_back(pairs[i][1]);
-// 			pairComplements.push_back(pairs[i][0]);
-// 		}
-// 	}
-// }
 
 void vecRecInsertSort(std::vector< std::vector<int> > &pairs, int size)
 {
@@ -172,18 +184,12 @@ void vecBinaryInsertion(std::vector<int> &sorted, std::vector<int> &pairCompleme
 		
 		sorted.insert(insertingBefore, pairComplements[insertionOrder[i] - 2]);
 		int insertIndex = insertingBefore - sorted.begin();
+		// std::cout << "Vector : elem : " << pairComplements[insertionOrder[i] - 2] << ", insertIndex = " << insertIndex << std::endl;
 		for (int i = 0; i < (int)boundsIndexes.size(); i++)
 		{
 			if (boundsIndexes[i] >= insertIndex)
 				boundsIndexes[i]++;
 		}		
-		
-		// size_t insertIndex = std::distance(sorted.begin() , insertingBefore);
-		// for (size_t i = 0; i < boundsIndexes.size(); i++)
-		// {
-			// if ((size_t)boundsIndexes[i] >= insertIndex)
-				// boundsIndexes[i]++;
-		// }
 	}
 }
 
@@ -250,38 +256,6 @@ std::list<int>::iterator getSteppedIterator(std::list<int> list, int steps)
 	return (it);
 }
 
-// void listRecInsertSort(std::list<int> &smallest, std::list<int> &largest) {
-// 	bool stopSearch = false;
-	
-// 	for (size_t i = 0; i < largest.size(); i++)
-// 	{
-// 		std::list<int>::iterator it = getMovedIterator(largest.begin(), i);
-// 		stopSearch = false;
-// 		for (std::list<int>::iterator it_sublist = largest.begin(); it_sublist != it && stopSearch == false; it_sublist++)
-// 		{
-// 			if (*it_sublist > *it)
-// 			{
-// 				stopSearch = true;
-// 				std::list<int>::iterator it_equivalent = getMovedIterator(smallest.begin(), std::distance(largest.begin(), it));
-// 				if (it_sublist == largest.begin())
-// 				{
-// 					int x = *it, y = *it_equivalent;
-// 					largest.erase(it);
-// 					largest.push_front(x);
-// 					smallest.erase(it_equivalent);
-// 					smallest.push_front(y);
-// 				}
-// 				else
-// 				{
-// 					smallest.splice(getMovedIterator(smallest.begin(), std::distance(largest.begin(), it_sublist)), smallest, it_equivalent);
-// 					largest.splice(it_sublist, largest, it);
-// 					std::move(it, it, it_sublist);
-// 				}
-// 			}
-// 		}
-// 	}
-// }
-
 int getValueAtIndex(std::list<int> list, int index)
 {
 	if (index >= list.size())
@@ -289,44 +263,6 @@ int getValueAtIndex(std::list<int> list, int index)
 	std::list<int>::iterator it = list.begin();
 	std::advance(it, index);
 	return *it;
-}
-
-std::list<int>::iterator getItAtIndex(std::list<int> list, int index)
-{
-	// if (index >= list.size())
-	// 	; // ?
-	std::list<int>::iterator it = list.begin();
-	std::advance(it, index);
-	return it;
-}
-
-std::list<int>::iterator getItAtSteps(std::list<int>::iterator listIt, int step)
-{
-	std::list<int>::iterator it = listIt;
-	std::advance(it, step);	// a securiser ?
-	return it;
-}
-
-int distInList(std::list<int>::iterator begin, std::list<int>::iterator end)
-{
-	int d = 0;
-	for (std::list<int>::iterator it = begin; it != end; it++)
-		d++;
-	return d;
-}
-
-void printList(std::list<int> list)
-{
-	for (std::list<int>::iterator it = list.begin(); it != list.end(); it++)
-	{
-		if (*it > *(getItAtSteps(it, 1)))
-		{
-			int index = distInList(list.begin(), it);
-			std::cout << std::endl << "--------------------- Error at index " << index << ", element "<< *it << "------------------------ " << std::endl;
-			return ; 
-		}
-		std::cout << *it << " ";
-	}
 }
 
 void listRecInsertSort(std::list<int> &smallest, std::list<int> &largest, int size)
@@ -343,56 +279,41 @@ void listRecInsertSort(std::list<int> &smallest, std::list<int> &largest, int si
 	// std::list<int>::iterator it = getItAtIndex(largest, size - 2);
 	// std::cout << " *it = " << *it << ", *itComplement = " << *itComplement << std::endl;
 	
-	std::list<int>::iterator it = largest.begin();
-	std::advance(it, size - 2);
-	std::list<int>::iterator itComp = smallest.begin();
-	std::advance(itComp, size - 2);
+	std::list<int>::iterator pos = largest.begin();
+	std::advance(pos, size - 2);
+	std::list<int>::iterator posComp = smallest.begin();
+	std::advance(posComp, size - 2);
 
-	while (it != largest.begin())
+	int j = size - 2;
+
+	// parse tous les elements, commençant à partir de celui précédant l'élément à insérer, jusqu'au premier
+	while (j >= 0 && *pos > last) //(pos != largest.begin() && *pos > last)
 	{
-		if (*it > last && *(--it) <= last)
+		// décale vers la droite : la valeur de l'élément à la position 'pos' devient celle de l'élément à la position 'pos + 1'
+		
+		std::list<int>::iterator next = pos;
+		std::list<int>::iterator nextComp = posComp;
+		next++;
+		nextComp++;
+		
+		*next = *pos;
+		*nextComp = *posComp;
+		if (pos == largest.begin())
 		{
-			largest.insert(it, last);
-			smallest.insert(itComp, lastComplement);
-			return ;
+			*pos = last;
+			*posComp = lastComplement;
 		}
-		else
-		{
-			it--;
-			itComp--;
-		}
+		pos--;
+		posComp--;
+		j--;
 	}
-	largest.push_front(last);
-	smallest.push_front(lastComplement);
+	std::list<int>::iterator next = pos;
+	std::list<int>::iterator nextComp = posComp;
+	next++;
+	nextComp++;
 
-	largest.erase(getItAtIndex(largest, size - 1));
-	smallest.erase(getItAtIndex(smallest, size - 1));
-	
-	// for (; it != largest.begin() && *it > last; it--, itComp--)
-	// {
-	// 	*(getItAtSteps(it, 1)) = *it;
-	// 	*(getItAtSteps(itComp, 1)) = *itComp;
-	// }
-	// if (it == largest.begin() && *it > last)
-	// {
-	// 	*(getItAtSteps(it, 1)) = *it;
-	// 	*(getItAtSteps(itComp, 1)) = *itComp;
-
-	// 	// it--; 
-	// 	// itComp--;
-	// 	// *it = last;
-	// 	// *itComp = lastComplement;
-
-	// 	*(getItAtSteps(it, -1)) = last;
-	// 	*(getItAtSteps(itComp, -1)) = lastComplement;
-	// }
-	// else
-	// {
-	// 	*(getItAtSteps(it, 1)) = last;
-	// 	*(getItAtSteps(itComp, 1)) = lastComplement;
-	// }
-	
-	
+	*next = last;
+	*nextComp = lastComplement;	
 }
 
 
@@ -416,19 +337,54 @@ std::list<int> &insertionOrder, std::list<int> &boundsIndexes, size_t sequenceSi
 }
 
 void listBinaryInsertion(std::list<int> &largest, std::list<int> &smallest,
-std::list<int> &insertionOrder, std::list<int> &boundsIndexes) {
+std::list<int> &insertionOrder, std::list<int> &boundsIndexes)
+{
 	for (std::list<int>::iterator it = insertionOrder.begin(), it_bounds = boundsIndexes.begin() ; it != insertionOrder.end(); it++, it_bounds++)
 	{
-		// std::list<int>::iterator insertingBefore = std::lower_bound(largest.begin(), getMovedIterator(largest.begin(), *it_bounds), *(getMovedIterator(smallest.begin(), *it - 2)));
-		std::list<int>::iterator insertingBefore = std::lower_bound(largest.begin(), largest.end(), *(getMovedIterator(smallest.begin(), *it - 2)));
-		largest.insert(insertingBefore, *(getMovedIterator(smallest.begin(), *it - 2)));
+		size_t upperBoundValue = *getMovedIterator(largest.begin(), *it_bounds);
+		std::cout << "upperBoundIndex = " << *it_bounds << std::endl;
+		std::list<int>::iterator insertingBefore;
+		if (*it_bounds >= largest.size())
+		{
+			std::cout << "coucouuuuuuu" << std::endl;
+			insertingBefore = std::lower_bound(largest.begin(), largest.end(), *(getMovedIterator(smallest.begin(), *it - 2)));
+		}
+		else
+			insertingBefore = std::lower_bound(largest.begin(), getMovedIterator(largest.begin(), *it_bounds), *(getMovedIterator(smallest.begin(), *it - 2)));
+		// std::list<int>::iterator insertingBefore = std::lower_bound(largest.begin(), largest.end(), *(getMovedIterator(smallest.begin(), *it - 2)));
 		
-		// size_t insertIndex = std::distance(largest.begin(), insertingBefore);
-		// for (std::list<int>::iterator it = boundsIndexes.begin(); it != boundsIndexes.end(); it++)
+		if (insertingBefore == getMovedIterator(largest.begin(), *it_bounds) && *(getMovedIterator(smallest.begin(), *it - 2)) > *getMovedIterator(largest.begin(), *it_bounds))
+		{
+			if (insertingBefore != largest.end())
+			{
+				insertingBefore++;
+				insertingBefore++; // a supprimeeeeeeer
+				std::cout << "=====coucou======" << std::endl;
+			}
+			std::cout << "LOLLLLLLL, elem a inserer : " << *(getMovedIterator(smallest.begin(), *it - 2)) << ", borne supérieure = " << *getMovedIterator(largest.begin(), *it_bounds) << ", insertingBefore++ = " << *insertingBefore << ", insertingBefore + 2 = " << *getMovedIterator(insertingBefore, 1) << std::endl;
+			
+		}
+		
+		largest.insert(insertingBefore, *(getMovedIterator(smallest.begin(), *it - 2)));
+		// std::cout << "List : insertingBefore = " << *insertingBefore << std::endl;
+
+		// int insertIndex = std::distance(largest.begin(), insertingBefore);
+		int insertIndex = distInList(largest.begin(), insertingBefore);
+		// std::cout << "List : elem : " << *(getMovedIterator(smallest.begin(), *it - 2)) << ", insertIndex = " << insertIndex << std::endl;
+		for (std::list<int>::iterator it = boundsIndexes.begin(); it != boundsIndexes.end(); it++)
+		{
+			// std::cout << "*it = " << *it << ", insertIndex = " << insertIndex << ", ";
+			if (*it >= insertIndex)
+				(*it)++;
+		}
+		// std::cout << std::endl;
+
+		// int insertIndex = insertingBefore - sorted.begin();
+		// for (int i = 0; i < (int)boundsIndexes.size(); i++)
 		// {
-			// if ((size_t)*it >= insertIndex)
-				// (*it)++;
-		// }
+			// if (boundsIndexes[i] >= insertIndex)
+				// boundsIndexes[i]++;
+		// }		
 	}
 }
 
