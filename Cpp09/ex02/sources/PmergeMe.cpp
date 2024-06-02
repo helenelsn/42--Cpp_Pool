@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:49:50 by Helene            #+#    #+#             */
-/*   Updated: 2024/06/02 15:45:50 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/06/02 15:49:46 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,7 +290,7 @@ void dequeBinaryInsertion(std::deque<int> &main, std::deque<int> &pending,
 	for (size_t i = 0; i < insertionOrder.size(); i++)
 	{
 		std::deque<int>::iterator insertingBefore;
-		if (boundsIndexes[i] + addedCount >= main.size())
+		if (size_t(boundsIndexes[i] + addedCount) >= main.size())
 			insertingBefore = (std::lower_bound(main.begin(), main.end(), pending[insertionOrder[i] - 2]));
 		else
 			insertingBefore = (std::lower_bound(main.begin(), main.begin() + boundsIndexes[i] + addedCount, pending[insertionOrder[i] - 2]));
@@ -421,8 +421,6 @@ std::list<int>::iterator getSteppedIterator(std::list<int> list, int steps)
 
 int getValueAtIndex(std::list<int> list, int index)
 {
-	if (index >= list.size())
-		; // ?
 	std::list<int>::iterator it = list.begin();
 	std::advance(it, index);
 	return *it;
